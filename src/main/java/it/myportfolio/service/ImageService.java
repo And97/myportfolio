@@ -1,4 +1,4 @@
-package it.myportofolio.service;
+package it.myportfolio.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package it.myportofolio.service;
+package it.myportfolio.service;
 
 import java.util.Set;
 

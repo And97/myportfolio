@@ -18,7 +18,7 @@ import it.myportfolio.dto.WorkDTO;
 import it.myportfolio.mapper.Mapper;
 import it.myportfolio.model.User;
 import it.myportfolio.model.Work;
-import it.myportofolio.service.UserService;
+import it.myportfolio.service.UserService;
 
 @RestController
 @RequestMapping("api/user")

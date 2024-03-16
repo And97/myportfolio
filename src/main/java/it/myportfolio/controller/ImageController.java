@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.myportfolio.dto.ImageDTO;
 import it.myportfolio.mapper.Mapper;
 import it.myportfolio.model.Image;
-import it.myportofolio.service.ImageService;
+import it.myportfolio.service.ImageService;
 
 @RestController
 @RequestMapping("/image")

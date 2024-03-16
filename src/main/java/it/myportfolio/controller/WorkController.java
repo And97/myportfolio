@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.myportfolio.dto.WorkDTO;
 import it.myportfolio.mapper.Mapper;
 import it.myportfolio.model.Work;
-import it.myportofolio.service.WorkService;
+import it.myportfolio.service.WorkService;
 
 @RestController
 @RequestMapping("/work")

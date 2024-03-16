@@ -17,7 +17,7 @@ import it.myportfolio.dto.UserDTO;
 
 import it.myportfolio.mapper.Mapper;
 import it.myportfolio.model.User;
-import it.myportofolio.service.UserService;
+import it.myportfolio.service.UserService;
 
 @RestController
 @RequestMapping("/user")

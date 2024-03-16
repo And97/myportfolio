@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.myportfolio.dto.ShopableImageDTO;
 import it.myportfolio.mapper.Mapper;
 import it.myportfolio.model.ShopableImage;
-import it.myportofolio.service.ShopableImageService;
+import it.myportfolio.service.ShopableImageService;
 
 @RequestMapping("/shopableimage")
 @RestController
