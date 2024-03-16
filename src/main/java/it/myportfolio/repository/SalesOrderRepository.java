@@ -1,9 +1,11 @@
 package it.myportfolio.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import it.myportfolio.model.SalesOrder;
 
-public interface SalesOrderRepository extends CrudRepository<SalesOrder, Long> {
+@Repository
+public interface SalesOrderRepository extends JpaRepository<SalesOrder, Long> {
 
 }

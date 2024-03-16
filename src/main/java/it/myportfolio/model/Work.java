@@ -24,7 +24,7 @@ public class Work {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Long ID;
+	private Long Id;
 
 	@Column(nullable = false)
 	private String title;
@@ -42,33 +42,25 @@ public class Work {
 	@JoinTable(name = "visible_work", 
 	joinColumns = @JoinColumn(name = "work_id"),
 	inverseJoinColumns = @JoinColumn(name = "user_id"))
-	//@ManyToMany(mappedBy = "visibleWorks")
 	private Set<User> users = new HashSet<>();
 
 	public Long getID() {
-		return ID;
+		return Id;
 	}
 
-	public void setID(Long iD) {
-		ID = iD;
+	public void setID(Long Id) {
+		this.Id = Id;
 	}
 
 	public String getTitle() {
 		return title;
 	}
-
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	
 	public String getCompany() {
 		return company;
 	}
@@ -76,7 +68,7 @@ public class Work {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-
+	
 	public Date getCompletionDate() {
 		return completionDate;
 	}
@@ -84,13 +76,21 @@ public class Work {
 	public void setCompletionDate(Date completionDate) {
 		this.completionDate = completionDate;
 	}
-
+	
 	public Set<Image> getImage() {
 		return image;
 	}
 
 	public void setImage(Set<Image> image) {
 		this.image = image;
+	}
+	
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 }

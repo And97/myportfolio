@@ -32,12 +32,13 @@ public class SalesOrder {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    
 	public Long getId() {
 		return Id;
 	}
 
-	public void setId(Long id) {
-		Id = id;
+	public void setId(Long Id) {
+		this.Id = Id;
 	}
 
 	public Date getTimestamp() {

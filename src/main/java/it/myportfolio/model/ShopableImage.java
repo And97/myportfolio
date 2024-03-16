@@ -14,7 +14,7 @@ public class ShopableImage {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private Long ID;
+	private Long Id;
 	
 	private String label;
 	
@@ -31,11 +31,11 @@ public class ShopableImage {
 
 
 	public Long getID() {
-		return ID;
+		return Id;
 	}
 
-	public void setID(Long iD) {
-		ID = iD;
+	public void setID(Long Id) {
+		this.Id = Id;
 	}
 
 	public String getLabel() {
@@ -50,8 +50,8 @@ public class ShopableImage {
 		return URL;
 	}
 
-	public void setURL(String uRL) {
-		URL = uRL;
+	public void setURL(String URL) {
+		this.URL = URL;
 	}
 
 	public String getThumbnailURL() {

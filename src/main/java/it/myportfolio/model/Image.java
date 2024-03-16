@@ -23,14 +23,13 @@ public class Image {
 	
 	private String thumbnailURL;
 	
-
 	
 	public Long getId() {
 		return Id;
 	}
 
-	public void setId(Long iD) {
-		Id = iD;
+	public void setId(Long Id) {
+		this.Id = Id;
 	}
 
 	public String getLabel() {
@@ -45,8 +44,8 @@ public class Image {
 		return URL;
 	}
 
-	public void setURL(String uRL) {
-		URL = uRL;
+	public void setURL(String URL) {
+		this.URL = URL;
 	}
 
 	public String getThumbnailURL() {

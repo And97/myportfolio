@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ComponentScan(basePackages = {"it.myportfolio"})
 @EnableJpaRepositories(basePackages  = "it.myportfolio.repository")
-@EntityScan("it.myportfolio")
+@EntityScan("it.myportfolio.model")
 @ComponentScan("it.myportofolio.service")
 
 public class MyportfolioApplication {

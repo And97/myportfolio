@@ -1,7 +1,5 @@
 package it.myportfolio.dto;
 
-
-
 import it.myportfolio.model.ShopableImage;
 
 

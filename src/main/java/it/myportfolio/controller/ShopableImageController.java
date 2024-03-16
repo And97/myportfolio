@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import it.myportfolio.dto.ShopableImageDTO;
-import it.myportfolio.mapper.ShopableImageMapper;
+import it.myportfolio.mapper.Mapper;
 import it.myportfolio.model.ShopableImage;
 import it.myportofolio.service.ShopableImageService;
 
@@ -40,13 +39,13 @@ public class ShopableImageController {
 	@GetMapping("/all")
 	public ResponseEntity<List<ShopableImageDTO>> getAllShopableImages() {
 		Iterable<ShopableImage> shopableImages = shopableImageService.getAllShopableImages();
-		List<ShopableImageDTO> shopableImageDTOs = ShopableImageMapper.toDTOList(shopableImages);
+		List<ShopableImageDTO> shopableImageDTOs = Mapper.toDTOList(ShopableImageDTO.class,shopableImages);
 		return ResponseEntity.ok(shopableImageDTOs);
 	}
 
 	@PostMapping("/add")
 	public ResponseEntity<ShopableImageDTO> addShopableImage(@RequestBody ShopableImageDTO shopableImageDTO) {
-		ShopableImage shopableImage = ShopableImageMapper.toShopableImage(shopableImageDTO);
+		ShopableImage shopableImage = Mapper.toEntity(ShopableImage.class, shopableImageDTO);
 		ShopableImage savedShopableImage = shopableImageService.addShopableImage(shopableImage);
 		shopableImageDTO.setID(savedShopableImage.getID());
 		return new ResponseEntity<>(shopableImageDTO, HttpStatus.CREATED);
@@ -65,12 +64,12 @@ public class ShopableImageController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<ShopableImageDTO> updateShopableImage(@PathVariable Long id, @RequestBody ShopableImageDTO shopableImageDTO) {
-		ShopableImage updatedShopableImage = ShopableImageMapper.toShopableImage(shopableImageDTO);
+		ShopableImage updatedShopableImage = Mapper.toEntity(ShopableImage.class,shopableImageDTO);
 		ShopableImage savedShopableImage = shopableImageService.updateImage(id, updatedShopableImage);
 		if (savedShopableImage == null) {
 			return ResponseEntity.notFound().build(); // Image not found
 		}
-		return ResponseEntity.ok(ShopableImageMapper.toShopableImageDTO(savedShopableImage));
+		return ResponseEntity.ok(Mapper.toDTO(ShopableImageDTO.class,savedShopableImage));
 	}
 }
 

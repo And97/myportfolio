@@ -1,10 +1,5 @@
 package it.myportfolio.dto;
 
-
-import java.util.Set;
-
-import it.myportfolio.model.SalesOrder;
-import it.myportfolio.model.ShopableImage;
 import it.myportfolio.model.User;
 
 public class UserPersonalDetailsDTO {
@@ -41,14 +36,11 @@ public class UserPersonalDetailsDTO {
 	}
 
 
-
 	public static UserPersonalDetailsDTO fromUser(User user) {
 		UserPersonalDetailsDTO dto = new UserPersonalDetailsDTO();
-		
 		dto.setSurname(user.getSurname());
 		dto.setName(user.getName());
 		dto.setEmail(user.getEmail());
-		
 		return dto;
 	}
 

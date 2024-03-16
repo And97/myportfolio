@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Set;
 
 import it.myportfolio.model.Image;
-import it.myportfolio.model.User;
 import it.myportfolio.model.Work;
 
 public class WorkDTO {
@@ -14,8 +13,7 @@ public class WorkDTO {
 	private String company;
 	private Date completionDate;
 	private Set<Image> image;
-	//private Set<User> users;
-	
+		
 
 	public Long getID() {
 		return ID;
@@ -47,12 +45,6 @@ public class WorkDTO {
 	public void setImage(Set<Image> image) {
 		this.image = image;
 	}
-//	public Set<User> getUsers() {
-//		return users;
-//	}
-//	public void setUsers(Set<User> users) {
-//		this.users = users;
-//	}
 	
 	public static WorkDTO fromWork(Work work) {
         WorkDTO dto = new WorkDTO();
@@ -61,7 +53,6 @@ public class WorkDTO {
         dto.setCompany(work.getCompany());
         dto.setCompletionDate(work.getCompletionDate());
         dto.setImage(work.getImage());
-        //dto.setUsers(work.getUsers());
         return dto;
     }
 

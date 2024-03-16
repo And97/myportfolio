@@ -5,16 +5,17 @@ package it.myportfolio.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -26,7 +27,7 @@ public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private Long ID;
+	private Long Id;
 	
 	private String surname;
 	private String name;
@@ -38,31 +39,24 @@ public class User {
     @JoinColumn(name = "shopableimage_id")
     private Set<ShopableImage> shopableImage = new HashSet<>();
 	
-	@JsonIgnore
+	//@JsonIgnore 
 	@ManyToMany(mappedBy = "users")
-//	@ManyToMany
-//    @JoinTable(
-//        name = "visible_work",
-//        joinColumns = @JoinColumn(name = "user_id"),
-//        inverseJoinColumns = @JoinColumn(name = "work_id")
-//    )
 	private Set<Work> visibleWorks;
 	
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<SalesOrder> sales;
+    
+    @Enumerated(EnumType.STRING)
+    private Role roles;
 	
-	public Set<SalesOrder> getSales() {
-		return sales;
+
+    public Long getId() {
+		return Id;
 	}
-	public void setSales(Set<SalesOrder> sales) {
-		this.sales = sales;
+	public void setId(Long id) {
+		Id = id;
 	}
-	public Long getID() {
-		return ID;
-	}
-	public void setID(Long iD) {
-		ID = iD;
-	}
+	
 	public String getSurname() {
 		return surname;
 	}
@@ -103,6 +97,21 @@ public class User {
 		this.visibleWorks = visibleWorks;
 	}
 
+	public Set<SalesOrder> getSales() {
+		return sales;
+	}
+	public void setSales(Set<SalesOrder> sales) {
+		this.sales = sales;
+	}
+	
+	public Role getRoles() {
+		return roles;
+	}
+	public void setRoles(Role roles) {
+		this.roles = roles;
+	}
+	
+	
 	
 	
 	

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.myportfolio.dto.ImageDTO;
-import it.myportfolio.mapper.ImageMapper;
 import it.myportfolio.mapper.Mapper;
 import it.myportfolio.model.Image;
 import it.myportofolio.service.ImageService;
@@ -26,15 +25,6 @@ public class ImageController {
 	@Autowired
 	ImageService imageService;
 	
-	//@GetMapping("/{id}")
-   
-//	public ResponseEntity<ImageDTO> getImageById(@PathVariable Long id) {
-//        Image image = imageService.getImageById(id);
-//        if (image == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        return ResponseEntity.ok(ImageDTO.fromImage(image));
-//    }
 	@GetMapping
     public ResponseEntity<ImageDTO> getImageById(@RequestParam Long id) {
         Image image = imageService.getImageById(id);
@@ -43,13 +33,7 @@ public class ImageController {
         }
         return ResponseEntity.ok(ImageDTO.fromImage(image));
     }
-//   @PostMapping("/add")
-//    public ResponseEntity<ImageDTO> addImage(@RequestBody ImageDTO imageDTO) {
-//    	Image image = ImageMapper.toImage(imageDTO);
-//        Image savedImage = imageService.addImage(image);
-//        imageDTO.setId(savedImage.getId());
-//        return new ResponseEntity<>(imageDTO, HttpStatus.CREATED);
-//    }
+
 	  @PostMapping("/add")
 	  public ResponseEntity<ImageDTO> addImage(@RequestBody ImageDTO imageDTO) {
 	  	  Image image = Mapper.toEntity(Image.class, imageDTO);
@@ -71,12 +55,12 @@ public class ImageController {
     
     @PutMapping("/{id}")
     public ResponseEntity<ImageDTO> updateImage(@PathVariable Long id, @RequestBody ImageDTO imageDTO) {
-        Image updatedImage = ImageMapper.toImage(imageDTO);
+        Image updatedImage = Mapper.toEntity(Image.class, imageDTO);
         Image savedImage = imageService.updateImage(id, updatedImage);
         if (savedImage == null) {
             return ResponseEntity.notFound().build(); // Image not found
         }
-        return ResponseEntity.ok(ImageMapper.toImageDTO(savedImage));
+        return ResponseEntity.ok(Mapper.toDTO(ImageDTO.class, savedImage));
     }
 
 }

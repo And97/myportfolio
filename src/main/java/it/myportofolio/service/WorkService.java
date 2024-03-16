@@ -1,6 +1,5 @@
 package it.myportofolio.service;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,7 @@ public class WorkService {
 	public Work updateWork(Long id, Work updatedWork) {
 		 	Work existingWork = workRepository.findById(id).orElse(null);
 	        if (existingWork == null) {
-	            return null; // User not found
+	            return null;
 	        }
 	        
 	        existingWork.setTitle(updatedWork.getTitle());
