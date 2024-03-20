@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.myportfolio.dto.UserDTO;
 import it.myportfolio.dto.UserPersonalDetailsDTO;
 import it.myportfolio.dto.WorkDTO;
 import it.myportfolio.mapper.Mapper;
@@ -27,17 +26,31 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	//restiuisce anagrafica utente 
+	@GetMapping("/")
+	public ResponseEntity<UserPersonalDetailsDTO> getPersonalDetails(@RequestParam Long userId) {
+		User user = userService.getUserById(userId);
+
+		if (user == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(Mapper.toDTO(UserPersonalDetailsDTO.class, user));
+	}
+	
+
+	//permette aggiornamento dei dati personali di un utente
 	@PutMapping("/")
-	public ResponseEntity<UserDTO> personalDetails(@RequestParam Long userId, @RequestBody UserPersonalDetailsDTO userDTO) {
+	public ResponseEntity<UserPersonalDetailsDTO> personalDetails(@RequestParam Long userId, @RequestBody UserPersonalDetailsDTO userDTO) {
 		User updatedUser = Mapper.toEntity(User.class, userDTO);
 
 		User savedUser = userService.updateUser(userId, updatedUser);
 		if (savedUser == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(Mapper.toDTO(UserDTO.class, savedUser));
+		return ResponseEntity.ok(Mapper.toDTO(UserPersonalDetailsDTO.class, savedUser));
 	}
 
+	//restituisce i work per cui un utente ha l'accesso in visualizzazione
 	@GetMapping("/work")
 	public ResponseEntity<Set<WorkDTO>> getVisibleWorksByUserId(@RequestParam Long userId) {
 		Set<Work> works = userService.findVisibleWorksByUserId(userId);

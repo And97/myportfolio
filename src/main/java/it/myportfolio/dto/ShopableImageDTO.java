@@ -52,7 +52,7 @@ public class ShopableImageDTO {
 
 	public static ShopableImageDTO fromShopableImage(ShopableImage shopableImage) {
 		ShopableImageDTO dto = new ShopableImageDTO();
-		dto.setID(shopableImage.getID());
+		dto.setID(shopableImage.getId());
 		dto.setLabel(shopableImage.getLabel());
 		dto.setURL(shopableImage.getURL());
 		dto.setThumbnailURL(shopableImage.getThumbnailURL());

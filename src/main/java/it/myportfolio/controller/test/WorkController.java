@@ -1,4 +1,4 @@
-package it.myportfolio.controller;
+package it.myportfolio.controller.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

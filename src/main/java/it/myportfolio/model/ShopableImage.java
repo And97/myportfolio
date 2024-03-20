@@ -30,11 +30,11 @@ public class ShopableImage {
 	private float price;
 
 
-	public Long getID() {
+	public Long getId() {
 		return Id;
 	}
 
-	public void setID(Long Id) {
+	public void setId(Long Id) {
 		this.Id = Id;
 	}
 

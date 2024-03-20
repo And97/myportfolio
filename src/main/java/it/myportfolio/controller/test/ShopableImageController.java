@@ -1,4 +1,4 @@
-package it.myportfolio.controller;
+package it.myportfolio.controller.test;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class ShopableImageController {
 	public ResponseEntity<ShopableImageDTO> addShopableImage(@RequestBody ShopableImageDTO shopableImageDTO) {
 		ShopableImage shopableImage = Mapper.toEntity(ShopableImage.class, shopableImageDTO);
 		ShopableImage savedShopableImage = shopableImageService.addShopableImage(shopableImage);
-		shopableImageDTO.setID(savedShopableImage.getID());
+		shopableImageDTO.setID(savedShopableImage.getId());
 		return new ResponseEntity<>(shopableImageDTO, HttpStatus.CREATED);
 	}
 

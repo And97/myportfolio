@@ -35,11 +35,13 @@ public class User {
 	private String password;
 	
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	
+	@OneToMany//(cascade = CascadeType.ALL)
     @JoinColumn(name = "shopableimage_id")
     private Set<ShopableImage> shopableImage = new HashSet<>();
 	
 	//@JsonIgnore 
+   // @OneToMany(cascade = CascadeType.REMOVE)
 	@ManyToMany(mappedBy = "users")
 	private Set<Work> visibleWorks;
 	
