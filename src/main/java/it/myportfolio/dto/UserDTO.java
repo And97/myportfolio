@@ -3,9 +3,7 @@ package it.myportfolio.dto;
 import java.util.Set;
 
 import it.myportfolio.model.Role;
-import it.myportfolio.model.SalesOrder;
-import it.myportfolio.model.ShopableImage;
-import it.myportfolio.model.User;
+import it.myportfolio.model.Work;
 
 public class UserDTO {
 
@@ -13,8 +11,7 @@ public class UserDTO {
 	private String surname;
 	private String name;
 	private String email;
-	private Set<ShopableImage> shopableImage;
-	private Set<SalesOrder> sales;
+	private Set<Work> visibleWork;
 	private Role role;
 	
 	public Long getId() {
@@ -49,20 +46,14 @@ public class UserDTO {
 		this.email = email;
 	}
 
-	public Set<ShopableImage> getShopableImage() {
-		return shopableImage;
+	public Set<Work> getShopableImage() {
+		return this.visibleWork;
 	}
 
-	public void setShopableImage(Set<ShopableImage> image) {
-		this.shopableImage = image;
+	public void setShopableImage(Set<Work> visibleWork) {
+		this.visibleWork = visibleWork;
 	}
 	
-	public Set<SalesOrder> getSales() {
-		return sales;
-	}
-	public void setSales(Set<SalesOrder> sales) {
-		this.sales = sales;
-	}
 	
 	public Role getRole() {
 		return role;
@@ -72,17 +63,17 @@ public class UserDTO {
 		this.role = role;
 	}
 
-	public static UserDTO fromUser(User user) {
-		UserDTO dto = new UserDTO();
-		dto.setId(user.getId());
-		dto.setSurname(user.getSurname());
-		dto.setName(user.getName());
-		dto.setEmail(user.getEmail());
-		dto.setShopableImage(user.getShopableImage());
-		dto.setSales(dto.getSales());
-		dto.setRole(user.getRoles());
-
-		return dto;
-	}
+//	public static UserDTO fromUser(User user) {
+//		UserDTO dto = new UserDTO();
+//		dto.setId(user.getId());
+//		dto.setSurname(user.getSurname());
+//		dto.setName(user.getName());
+//		dto.setEmail(user.getEmail());
+//		dto.setShopableImage(user.getShopableImage());
+//		dto.setSales(dto.getSales());
+//		//dto.setRole(user.getRole());
+//
+//		return dto;
+//	}
 
 }

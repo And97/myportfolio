@@ -36,7 +36,7 @@ public class Work {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "work_id")
-	private Set<Image> image;
+	private Set<ImageProject> image;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "visible_work", 
@@ -77,11 +77,11 @@ public class Work {
 		this.completionDate = completionDate;
 	}
 	
-	public Set<Image> getImage() {
+	public Set<ImageProject> getImage() {
 		return image;
 	}
 
-	public void setImage(Set<Image> image) {
+	public void setImage(Set<ImageProject> image) {
 		this.image = image;
 	}
 	

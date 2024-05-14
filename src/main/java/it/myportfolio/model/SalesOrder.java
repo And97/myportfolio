@@ -1,9 +1,7 @@
 package it.myportfolio.model;
 
 import java.util.Date;
-
 import java.util.List;
-
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,12 +23,12 @@ public class SalesOrder {
 	private Long Id;
 
 	private Date timestamp;
-
-    @Column(name = "purchased_image")
-    private List<Long> purchasedImage;
+	
+	@OneToMany
+    @JoinColumn(name = "sales_order_id") 
+    private List<ShopableImage> purchasedImage;
     
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+	@ManyToOne
     private User user;
 
     
@@ -49,11 +48,11 @@ public class SalesOrder {
 		this.timestamp = timestamp;
 	}
 
-	public List<Long> getPurchasedImage() {
+	public List<ShopableImage> getPurchasedImage() {
 		return purchasedImage;
 	}
 
-	public void setPurchasedImage(List<Long> purchasedImage) {
+	public void setPurchasedImage(List<ShopableImage> purchasedImage) {
 		this.purchasedImage = purchasedImage;
 	}
 

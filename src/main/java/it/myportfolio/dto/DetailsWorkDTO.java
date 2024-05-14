@@ -1,15 +1,18 @@
 package it.myportfolio.dto;
 
 import java.util.Date;
+import java.util.Set;
 
+import it.myportfolio.model.ImageProject;
 import it.myportfolio.model.Work;
 
-public class WorkDTO {
+public class DetailsWorkDTO {
 	
 	private Long ID;
 	private String title;
 	private String company;
 	private Date completionDate;
+	private Set<ImageProject> images;
 
 	public Long getID() {
 		return ID;
@@ -36,12 +39,21 @@ public class WorkDTO {
 		this.completionDate = completionDate;
 	}
 	
-	public static WorkDTO fromWork(Work work) {
-        WorkDTO dto = new WorkDTO();
+	
+	
+	public Set<ImageProject> getImages() {
+		return images;
+	}
+	public void setImages(Set<ImageProject> images) {
+		this.images = images;
+	}
+	public static DetailsWorkDTO fromWork(Work work) {
+        DetailsWorkDTO dto = new DetailsWorkDTO();
         dto.setID(work.getID());
         dto.setTitle(work.getTitle());
         dto.setCompany(work.getCompany());
         dto.setCompletionDate(work.getCompletionDate());
+        dto.setImages(work.getImage());
         return dto;
     }
 

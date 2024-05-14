@@ -11,7 +11,7 @@ import it.myportfolio.repository.ShopableImageRepository;
 public class ShopableImageService {
 
 	@Autowired
-	ShopableImageRepository shopableImageRepository;
+	private ShopableImageRepository shopableImageRepository;
 
 	public ShopableImage getShopableImageById(Long id) {
 		return shopableImageRepository.findById(id).orElse(null);// .orElseThrow(()-> new
@@ -19,7 +19,8 @@ public class ShopableImageService {
 	}
 
 	public Iterable<ShopableImage> getAllShopableImages() {
-		return shopableImageRepository.findAll();
+		//return shopableImageRepository.findAll();
+		return shopableImageRepository.findByIsSoldFalse();
 		// ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 

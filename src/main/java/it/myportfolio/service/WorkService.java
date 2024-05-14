@@ -1,6 +1,8 @@
 package it.myportfolio.service;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +13,10 @@ import it.myportfolio.repository.WorkRepository;
 public class WorkService {
 	
 	@Autowired
-	WorkRepository workRepository;
+	private WorkRepository workRepository;
 	
-	public Work getWorkById(Long id) {
-		return workRepository.findById(id).orElse(null);
+	public Optional<Work> getWorkById(Long id) {
+		return workRepository.findById(id);//.orElse(null);
 	}
 
 	public Work addWork(Work work) {
@@ -25,7 +27,7 @@ public class WorkService {
 		workRepository.deleteById(id);
 		
 	}
-
+	
 	public Work updateWork(Long id, Work updatedWork) {
 		 	Work existingWork = workRepository.findById(id).orElse(null);
 	        if (existingWork == null) {
@@ -39,5 +41,14 @@ public class WorkService {
 	        return workRepository.save(existingWork);
 	}
 	
+	public Work getWorkDTOByIdAndUser(Long workId, Long userId) {
+        Optional<Work> optionalWork = workRepository.findWorkByIdAndUserId(workId, userId);
+
+        if (optionalWork.isPresent()) {
+            return optionalWork.get();
+        } else {
+            return null; 
+        }
+    }
 
 }

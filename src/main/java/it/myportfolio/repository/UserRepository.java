@@ -1,5 +1,6 @@
 package it.myportfolio.repository;
 
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +16,20 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@Query("SELECT w FROM User u JOIN u.visibleWorks w WHERE u.id = :userId")
 	public Set<Work> findVisibleWorksByUserId(@Param("userId") Long userId);
+	
+	//Optional<User> findByUsername(String username);
+	//Optional<User> findByEmail (String Email);
+	
+	//Boolean existsByUsername(String username);
+
+	//Boolean existsByEmail(String email);
+	
+	
+	  Optional<User> findByUsername(String username);
+
+	  Boolean existsByUsername(String username);
+
+	  Boolean existsByEmail(String email);
+
+	  Optional<User> findByUsernameAndEnabled(String username);
 }

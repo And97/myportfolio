@@ -1,10 +1,13 @@
 package it.myportfolio.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +32,8 @@ public class ShopableImage {
 	@Column(nullable = false)
 	private float price;
 
+	@ManyToMany(mappedBy = "shopableImages")
+    private List<Cart> cart;
 
 	public Long getId() {
 		return Id;
@@ -77,6 +82,16 @@ public class ShopableImage {
 	public void setPrice(float price) {
 		this.price = price;
 	}
+
+	public List<Cart> getCart() {
+		return cart;
+	}
+
+	public void setCart(List<Cart> cart) {
+		this.cart = cart;
+	}
+	
+	
 
 	
 

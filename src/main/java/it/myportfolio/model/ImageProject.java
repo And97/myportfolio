@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="image")
-public class Image {
+public class ImageProject {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

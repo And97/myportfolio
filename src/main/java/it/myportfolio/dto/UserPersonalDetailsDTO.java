@@ -1,22 +1,26 @@
 package it.myportfolio.dto;
 
-import it.myportfolio.model.User;
-
 public class UserPersonalDetailsDTO {
 
-	
+	private Long Id;
 	private String surname;
 	private String name;
 	private String email;
-	
-	
 
-	public String getName() {
-		return name;
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	public String getSurname() {
@@ -33,15 +37,6 @@ public class UserPersonalDetailsDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-
-	public static UserPersonalDetailsDTO fromUser(User user) {
-		UserPersonalDetailsDTO dto = new UserPersonalDetailsDTO();
-		dto.setSurname(user.getSurname());
-		dto.setName(user.getName());
-		dto.setEmail(user.getEmail());
-		return dto;
 	}
 
 }

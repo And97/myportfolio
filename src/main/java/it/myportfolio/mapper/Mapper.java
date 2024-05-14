@@ -2,8 +2,7 @@ package it.myportfolio.mapper;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import org.springframework.beans.BeanUtils;
 
@@ -41,17 +40,17 @@ public class Mapper {
 		return dto;
 	}
 
-	//funzione generica che restriusce una List DTO dato in input  un iterable di entità (model)
-	//Class<DTO> dtoClass -> tipo di oggetto che vogliano in output
-	//Iterable<Entity> entities iterable di entità (model) da trasformare in una  List di DTO
-	public static <Entity, DTO> List<DTO> toDTOList(Class<DTO> dtoClass, Iterable<Entity> entities) {
-		List<DTO> dtos = new ArrayList<>();
-		for (Entity entity : entities) {
-			DTO dto = toDTO(dtoClass, entity);
-			if (dto != null) {
-				dtos.add(dto);
-			}
-		}
-		return dtos;
-	}
+//	//funzione generica che restriusce una List DTO dato in input  un iterable di entità (model)
+//	//Class<DTO> dtoClass -> tipo di oggetto che vogliano in output
+//	//Iterable<Entity> entities iterable di entità (model) da trasformare in una  List di DTO
+//	public static <Entity, DTO> List<DTO> toDTOList(Class<DTO> dtoClass, Iterable<Entity> entities) {
+//		List<DTO> dtos = new ArrayList<>();
+//		for (Entity entity : entities) {
+//			DTO dto = toDTO(dtoClass, entity);
+//			if (dto != null) {
+//				dtos.add(dto);
+//			}
+//		}
+//		return dtos;
+//	}
 }

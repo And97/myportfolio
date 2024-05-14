@@ -3,21 +3,21 @@ package it.myportfolio.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import it.myportfolio.model.Image;
+import it.myportfolio.model.ImageProject;
 import it.myportfolio.repository.ImageRepository;
 
 @Service
 public class ImageService {
 	
 	@Autowired
-	ImageRepository imageRepository;
+	private ImageRepository imageRepository;
 	
-	public Image getImageById(Long id) {
+	public ImageProject getImageById(Long id) {
 		return imageRepository.findById(id).orElse(null);// .orElseThrow(()-> new
 																// ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 	
-	public Image addImage(Image image) {
+	public ImageProject addImage(ImageProject image) {
 		return imageRepository.save(image);
 	}
 	
@@ -25,8 +25,8 @@ public class ImageService {
 		imageRepository.deleteById(id);
 	}
 
-	public Image updateImage(Long id, Image updatedImage) {
-        Image existingImage = imageRepository.findById(id).orElse(null);
+	public ImageProject updateImage(Long id, ImageProject updatedImage) {
+        ImageProject existingImage = imageRepository.findById(id).orElse(null);
         if (existingImage == null) {
             return null; // User not found
         }

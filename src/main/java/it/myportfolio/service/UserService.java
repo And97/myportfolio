@@ -1,5 +1,6 @@
 package it.myportfolio.service;
 
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,13 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public User getUserById(Long id) {
-		return userRepository.findById(id).orElse(null);// .orElseThrow(()-> new
+	public Optional<User> getUserById(Long id) {
+		return userRepository.findById(id);//.orElse(null);// .orElseThrow(()-> new
+																// ResponseStatusException(HttpStatus.NOT_FOUND));
+	}
+	
+	public User getUserByUsername(String username) {
+		return userRepository.findByUsername(username).orElse(null);// .orElseThrow(()-> new
 																// ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 
@@ -48,6 +54,16 @@ public class UserService {
 	public Set<Work> findVisibleWorksByUserId(Long id){
 		return userRepository.findVisibleWorksByUserId(id);
 	}
+	
+//	public Boolean checkEmail(String email) {
+//		if (userRepository.findByEmail(email).isEmpty()) {
+//			System.out.println("utente non trovato con mail fornita");
+//			return true;
+//		}
+//		System.out.println("utente TROVATO con mail fornita");
+//		return false;
+//			
+//	}
 	
 		
 	

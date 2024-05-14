@@ -1,35 +1,25 @@
 package it.myportfolio.dto;
 
-import it.myportfolio.model.ShopableImage;
-
-
 public class ShopableImageDTO {
 	
-	private Long ID;
+	private Long Id;
 	private String label;
-	private boolean isSold;
 	private String URL;
 	private String thumbnailURL;
 	private float price;
 
 
 	public Long getID() {
-		return ID;
+		return Id;
 	}
-	public void setID(Long iD) {
-		ID = iD;
+	public void setID(Long Id) {
+		this.Id = Id;
 	}
 	public String getLabel() {
 		return label;
 	}
 	public void setLabel(String label) {
 		this.label = label;
-	}
-	public boolean isSold() {
-		return isSold;
-	}
-	public void setSold(boolean isSold) {
-		this.isSold = isSold;
 	}
 	public String getURL() {
 		return URL;
@@ -49,20 +39,5 @@ public class ShopableImageDTO {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-
-	public static ShopableImageDTO fromShopableImage(ShopableImage shopableImage) {
-		ShopableImageDTO dto = new ShopableImageDTO();
-		dto.setID(shopableImage.getId());
-		dto.setLabel(shopableImage.getLabel());
-		dto.setURL(shopableImage.getURL());
-		dto.setThumbnailURL(shopableImage.getThumbnailURL());
-		dto.setPrice(shopableImage.getPrice());
-		return dto;
-	}
-	
-	
-	
-	
-
 
 }

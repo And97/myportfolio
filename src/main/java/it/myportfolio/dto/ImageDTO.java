@@ -1,6 +1,6 @@
 package it.myportfolio.dto;
 
-import it.myportfolio.model.Image;
+import it.myportfolio.model.ImageProject;
 
 public class ImageDTO {
 
@@ -41,7 +41,7 @@ public class ImageDTO {
 		this.thumbnailURL = thumbnailURL;
 	}
 
-	public static ImageDTO fromImage(Image image) {
+	public static ImageDTO fromImage(ImageProject image) {
 		ImageDTO dto = new ImageDTO();
 		dto.setId(image.getId());
 		dto.setLabel(image.getLabel());
