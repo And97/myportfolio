@@ -31,7 +31,7 @@ public class ThumbnailController {
 
 	@PostMapping("")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<String> makeOrder(@RequestParam Long id) {
+	public ResponseEntity<String> makeThumbnail(@RequestParam Long id) {
 
 		Optional<Work> optionalWork = workService.getWorkById(id);
 

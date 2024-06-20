@@ -1,6 +1,7 @@
 package it.myportfolio.configuration;
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,8 +20,10 @@ import it.myportfolio.model.ERole;
 import it.myportfolio.model.ImageProject;
 import it.myportfolio.model.Role;
 import it.myportfolio.model.User;
+import it.myportfolio.model.Work;
 import it.myportfolio.repository.RoleRepository;
 import it.myportfolio.repository.UserRepository;
+import it.myportfolio.repository.WorkRepository;
 import it.myportfolio.utility.ThumbnailGenerator;
 
 
@@ -35,18 +38,19 @@ public class MyportfolioApplication {
 
 	public static void main(String[] args) throws java.io.IOException {
 		SpringApplication.run(MyportfolioApplication.class, args);
-//		ImageProject a = new ImageProject();
-//		a.setId(1L);
-//		a.setLabel("test");
-//		a.setURL("C:/Users/Andrea/Desktop/xxl.png");
-//		a.setThumbnailURL("C:/Users/Andrea/Desktop/thumb/xxl.png");
-//		
-//		try {
-//			ThumbnailGenerator.makeThumbnail(a);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		ImageProject a = new ImageProject();
+		a.setId(1L);
+		a.setLabel("test");
+		a.setURL("C:/Users/Andrea/Desktop/ta.jpeg");
+		a.setThumbnailURL("C:/Users/Andrea/Desktop/thumbnail/ta.jpeg");
+		
+		try {
+			ThumbnailGenerator.makeThumbnail(a);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	@Component
@@ -57,6 +61,10 @@ public class MyportfolioApplication {
 		
 		@Autowired
 	    UserRepository userRepository;
+		
+		
+		@Autowired
+	    WorkRepository workRepository;
 		
 		@Autowired
 		PasswordEncoder encoder;
@@ -75,6 +83,7 @@ public class MyportfolioApplication {
 	    	adminRoles.add(adminRole);
 	    	//adminRoles.add(userRole);
 	    	admin.setRoles(adminRoles);
+	    	admin.setEnable(true);
 			
 	    	userRepository.save(admin);
 	    	
@@ -83,7 +92,18 @@ public class MyportfolioApplication {
 	    	Set<Role> userRoles = new HashSet<>();
 	    	userRoles.add(userRole);
 	    	user.setRoles(userRoles);
+	    	user.setEnable(true);
 	    	userRepository.save(user);
+	    	
+	    	Work work = new Work ();
+	    	work.setCompany("Shop");
+	    	work.setCompletionDate(new java.util.Date());
+	    	work.setTitle("Shop");
+	    	
+	    	workRepository.save(work);
+	    	
+	    	//test metodi blockchain
+	    	
 	       
 	    }
 	}

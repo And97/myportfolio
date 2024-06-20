@@ -50,7 +50,7 @@ public class WorkController {
 	// qui ha accesso
 	// restituisce tutti i work per cui un utente ha l'accesso in visualizzazione
 	// senza riferimento alle Image
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@GetMapping("/all")
 	public ResponseEntity<Set<WorkDTO>> getVisibleWorksByUserId(HttpServletRequest request) {
 		String token = jwtUtils.getJwtFromCookies(request);

@@ -5,14 +5,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="image")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class ImageProject {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name="id")
 	private Long Id;
 	
@@ -55,11 +58,5 @@ public class ImageProject {
 	public void setThumbnailURL(String thumbnailURL) {
 		this.thumbnailURL = thumbnailURL;
 	}
-
-	
-	
-	
-	
-	
 	
 }
