@@ -94,6 +94,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>core</artifactId>
+			    <version>5.0.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

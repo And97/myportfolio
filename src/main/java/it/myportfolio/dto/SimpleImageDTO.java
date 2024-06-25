@@ -1,6 +1,5 @@
 package it.myportfolio.dto;
 
-import it.myportfolio.model.ImageProject;
 
 public class SimpleImageDTO {
 

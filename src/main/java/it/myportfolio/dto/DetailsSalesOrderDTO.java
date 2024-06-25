@@ -13,6 +13,7 @@ public class DetailsSalesOrderDTO {
     private Float totalPrice;
     private String username;
     private int piece;
+    private String hash;
     
     
 	public Long getId() {
@@ -51,7 +52,14 @@ public class DetailsSalesOrderDTO {
 	}
 	public void setPiece(int piece) {
 		this.piece = piece;
+	}
+	public String getHash() {
+		return hash;
+	}
+	public void setHash(String hash) {
+		this.hash = hash;
 	} 
+	
 	
 	
 

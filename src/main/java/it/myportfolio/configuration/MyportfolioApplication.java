@@ -1,7 +1,6 @@
 package it.myportfolio.configuration;
 
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,16 +14,16 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.io.IOException;
+
 import it.myportfolio.model.ERole;
-import it.myportfolio.model.ImageProject;
+
 import it.myportfolio.model.Role;
 import it.myportfolio.model.User;
 import it.myportfolio.model.Work;
 import it.myportfolio.repository.RoleRepository;
 import it.myportfolio.repository.UserRepository;
 import it.myportfolio.repository.WorkRepository;
-import it.myportfolio.utility.ThumbnailGenerator;
+
 
 
 
@@ -38,18 +37,19 @@ public class MyportfolioApplication {
 
 	public static void main(String[] args) throws java.io.IOException {
 		SpringApplication.run(MyportfolioApplication.class, args);
-		ImageProject a = new ImageProject();
-		a.setId(1L);
-		a.setLabel("test");
-		a.setURL("C:/Users/Andrea/Desktop/ta.jpeg");
-		a.setThumbnailURL("C:/Users/Andrea/Desktop/thumbnail/ta.jpeg");
 		
-		try {
-			ThumbnailGenerator.makeThumbnail(a);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		ImageProject a = new ImageProject();
+//		a.setId(1L);
+//		a.setLabel("test");
+//		a.setURL("C:/Users/Andrea/Desktop/ta.jpeg");
+//		a.setThumbnailURL("C:/Users/Andrea/Desktop/thumbnail/ta.jpeg");
+//		
+//		try {
+//			ThumbnailGenerator.makeThumbnail(a);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 	}
 	
@@ -81,7 +81,7 @@ public class MyportfolioApplication {
 	    	User admin = new User("admin", "admin@test.it", encoder.encode("admin"), "admin", "admin");
 	    	Set<Role> adminRoles = new HashSet<>();
 	    	adminRoles.add(adminRole);
-	    	//adminRoles.add(userRole);
+	    	adminRoles.add(userRole);
 	    	admin.setRoles(adminRoles);
 	    	admin.setEnable(true);
 			
@@ -101,8 +101,8 @@ public class MyportfolioApplication {
 	    	work.setTitle("Shop");
 	    	
 	    	workRepository.save(work);
-	    	
-	    	//test metodi blockchain
+	    
+	
 	    	
 	       
 	    }

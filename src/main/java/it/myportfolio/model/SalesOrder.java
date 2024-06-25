@@ -30,6 +30,8 @@ public class SalesOrder {
     
 	@ManyToOne
     private User user;
+	
+	private String hash;
 
     
 	public Long getId() {
@@ -63,6 +65,15 @@ public class SalesOrder {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+	
 	
 	
 

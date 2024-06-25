@@ -11,6 +11,7 @@ public class SalesOrderDTO {
     private String username;
     private Float price;
     private Long userID;
+    private String hash; 
 
     
 	public Long getId() {
@@ -43,7 +44,14 @@ public class SalesOrderDTO {
 	public void setPrice(Float price) {
 		this.price = price;
 	}
-
+	public String getHash() {
+		return hash;
+	}
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+ 
+    
 	
 	
 

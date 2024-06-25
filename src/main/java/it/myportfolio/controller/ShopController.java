@@ -28,6 +28,7 @@ import it.myportfolio.security.jwt.JwtUtils;
 import it.myportfolio.service.CartService;
 import it.myportfolio.service.SalesOrderService;
 import it.myportfolio.service.UserService;
+import it.myportfolio.utility.BlockchainTransactionService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -63,6 +64,7 @@ public class ShopController {
 				salesOrderDTO.setTimestamp(order.getTimestamp());
 				salesOrderDTO.setUsername(order.getUser().getUsername());
 				salesOrderDTO.setUserID(order.getUser().getId());
+				salesOrderDTO.setHash(order.getHash());
 
 				List<ShopableImage> shopableImages = order.getPurchasedImage();
 				float totalPrice = 0;
@@ -100,7 +102,7 @@ public class ShopController {
 				salesOrderDTO.setTimestamp(order.getTimestamp());
 				salesOrderDTO.setUsername(order.getUser().getUsername());
 				salesOrderDTO.setUserID(order.getUser().getId());
-
+				salesOrderDTO.setHash(order.getHash());
 				List<ShopableImage> shopableImages = order.getPurchasedImage();
 				float totalPrice = 0;
 				for (ShopableImage shopableImage : shopableImages) {
@@ -147,17 +149,14 @@ public class ShopController {
 				shopableImageDTOs.add(shopableImageDTO);
 				price = price + shopableImage.getPrice();
 				piece++;
-//				if (shopableImage.isSold() == true) {
-//					return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//							.body("Image" + shopableImage.getId() + "is Sold");
-//				}
 				shopableImage.setSold(true);
 			}
 
 			List<ShopableImage> images = new ArrayList<>();
-
+			List<Long> IID = new ArrayList<>();
 			for (ShopableImage shopableImage : shopableImages) {
 				images.add(shopableImage);
+				IID.add(shopableImage.getId());
 			}
 
 			cartService.emptyCart(user);
@@ -178,6 +177,18 @@ public class ShopController {
 			detailsSalesOrderDTO.setUsername(order.getUser().getUsername());
 			detailsSalesOrderDTO.setPiece(piece);
 
+			String hash = BlockchainTransactionService.registry_transaction(userId, IID, new java.util.Date());
+
+			int i = 0;
+			while (hash == null) {
+				if (i == 3) {
+					break;
+				}
+				hash = BlockchainTransactionService.verify_hash(hash);
+				i++;
+			}
+
+			detailsSalesOrderDTO.setHash(hash);
 			return ResponseEntity.ok(detailsSalesOrderDTO);
 
 		} else {
@@ -231,4 +242,22 @@ public class ShopController {
 
 	}
 
+	@PostMapping("/verify_hash")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<?> verifyHash(@RequestParam String hash) {
+		String verify = BlockchainTransactionService.verify_hash(hash);
+		int i = 0;
+		while (verify == null) {
+			if (i == 5) {
+				break;
+			}
+			verify = BlockchainTransactionService.verify_hash(hash);
+			i++;
+		}
+		if (verify == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("HASH NOT TRUTHFUL or SERVICE DOWN");
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(verify);
+	}
 }
