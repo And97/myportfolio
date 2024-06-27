@@ -5,7 +5,7 @@ import random
 
  
 infura_url = 'https://holesky.infura.io/v3/5cb88f299e974e9082c695c5fb3e9b13'  
-private_key = '413d73c28a311aade143dd222453e7e846c971dae0ca2979ed6c46b75ab2efc4' #metamask
+private_key = '#' #metamask
 from_account = '0x3403974b2c466A7Fc34EEBb607294f72C8CF49F3'  #metamask
 to_account = '0x00C007CFf2bAe0b56d667e5ce421FBA83B007'+ str(random.randint(100, 999))  # random
 web3 = Web3(Web3.HTTPProvider(infura_url))  
