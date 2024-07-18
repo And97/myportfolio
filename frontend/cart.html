@@ -54,7 +54,7 @@ Author URL: http://w3layouts.com
                             <a class="nav-link" href="contact.html">Contatti</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Login/Registrazione</a>
+                            <a class="nav-link " href="#">Carrello</a>
                         </li>
                     </ul>
                 </div>
@@ -82,70 +82,150 @@ Author URL: http://w3layouts.com
      <section class="inner-banner py-5">
         <div class="w3l-breadcrumb py-lg-5">
             <div class="container pt-sm-5 pt-4 pb-sm-4">
-                <h4 class="inner-text-title font-weight-bold pt-5">Login/Registrazione</h4>
+                <h4 class="inner-text-title font-weight-bold pt-5">Carrello</h4>
                 <ul class="breadcrumbs-custom-path">
                     <li><a href="index.html">Home</a></li>
-                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>Login/Registrazione</li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>Carrello</li>
                 </ul>
             </div>
         </div>
     </section>
    
 
-    <section class="w3l-contact py-5" id="contact">
-        <div class="container py-lg-5 py-md-4 py-2">
-            <div class="mx-auto pt-lg-4 pt-md-5 pt-4" style="max-width:1000px">
-                <div class="row contact-block">
+    <!-- gallery section -->
+    <section class="w3l-gallery py-5" id="gallery">
+        <div class="container py-md-5 py-4">
+            <div class="title-heading-w3 text-center mx-auto mb-sm-5 mb-4" style="max-width:700px">
+                <h3 class="title-style">Carrello</h3>
+            </div>
+        </div>
 
-                    <div class="col-md-6 contact-left mt-md-0 mt-4">
-                        <h3 class="title-style">Login</h3><br>
-                        <form action="#" method="post" class="signin-form">
-                            <div class="input-grids">
-                                <input type="text" name="username" id="username" placeholder="Username*"
-                                    class="contact-input" required="yes" />
-                                <input type="password" name="password" id="password" placeholder="Password*"
-                                    class="contact-input" required="yes" />
-                            </div>
-                            <hr>
-                            <button class="btn btn-style btn-style-primary-2">Accedi</button>
-                        </form>
+        <div class="container">
+            <div class="table-responsive" >
+              <table class="table table-bordered " >
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">ID Prodotto</th>
+                    <th scope="col">Prezzo</th>
+                    <th scope="col">Label</th>
+                    <th scope="col">Rimuovi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>€10.00</td>
+                    <td>Label 1 </td>
+                    <td>
+                      <button class="btn btn-danger">Rimuovi</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>€10.00</td>
+                    <td>Label 2 </td>
+                    <td>
+                      <button class="btn btn-danger">Rimuovi</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>€10.00</td>
+                    <td>Label 3 </td>
+                    <td>
+                      <button class="btn btn-danger">Rimuovi</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>€10.00</td>
+                    <td>Label 4 </td>
+                    <td>
+                      <button class="btn btn-danger">Rimuovi</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>€10.00</td>
+                    <td>Label 5</td>
+                    <td>
+                      <button class="btn btn-danger">Rimuovi</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>€10.00</td>
+                    <td>Label 6 </td>
+                    <td>
+                      <button class="btn btn-danger">Rimuovi</button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3" class="text-right"><strong>Totale Carrello:</strong></td>
+                    <td colspan="2">€60.00</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div class="text-right">
+                <button type="button" class="btn btn-success">Procedi al pagamento</button>
+                <button type="button" class="btn btn-danger">Svuota carrello</button>
+            </div>
+        </div>
+        <div class="container py-md-8 py-4">
+            <div class="title-heading-w3 text-center mx-auto mb-sm-5 mb-4" style="max-width:700px">
+                <h3 class="title-style">I tuoi ordini</h3>
+            </div>
+                <div class="container">
+                    <div class="table-responsive">
+                        <table class="table table-bordered ">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Timestamp</th>
+                                    <th scope="col">Prezzo</th>
+                                    <th scope="col">Hash</th>
+                                    <th scope="col">Dettagli</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>01/01/2024 10:00</td>
+                                    <td>100€</td>
+                                    <td>aa7787919A87S987987987ZA7</td>
+                                    <td>
+                                        <button class="btn btn-success">Dettagli</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>01/01/2024 10:00</td>
+                                    <td>100€</td>
+                                    <td>aa7787919A87S987987987ZA7</td>
+                                    <td>
+                                        <button class="btn btn-success">Dettagli</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>01/01/2024 10:00</td>
+                                    <td>100€</td>
+                                    <td>aa7787919A87S987987987ZA7</td>
+                                    <td>
+                                        <button class="btn btn-success">Dettagli</button>
+                                    </td>
+                                </tr>   
+                            </tbody>
+                        </table>
                     </div>
-                    
-                    <div class="col-md-6 contact-right mt-md-0 mt-4">
-                        <h3 class="title-style">Registrazione</h3><br>
-                        <form action="#" method="post" class="signin-form">
-                            <div class="input-grids">
-                                <input type="text" name="name" id="name" placeholder="Nome*"
-                                    class="contact-input" required="yes" />
-                                    <input type="text" name="surname" id="surname" placeholder="Cogmome*"
-                                    class="contact-input" required="" />
-                                <input type="email" name="email" id="email" placeholder="Email*"
-                                    class="contact-input" required="yes" />
-                                <input type="text" name="username" id="username" placeholder="Username*"
-                                    class="contact-input" required="" />
-                                <input type="password" name="password" id="password" placeholder="Password*"
-                                    class="contact-input" required="yes" />
-                            </div>
-                            <hr>
-                            <button class="btn btn-style btn-style-primary-2">Registrati</button>
-                        </form>
-                    </div>
+                   
                 </div>
             </div>
-        </div>
-    </section>  
-
-
-     <!-- call section -->
-     <section class="w3l-call-to-action-6 text-center py-5">
-        <div class="container py-md-4 py-3">
-            <div class="d-md-flex align-items-center justify-content-center">
-                <h3 class="title-big">Hai bisogno di altri info?</span></h3>
-                <a href="contact.html" class="btn btn-style ml-md-3 mt-md-0 mt-4">Contatti</a>
-            </div>
-        </div>
-    </section>
-    <!-- //call section -->
+        </div>  
+    </section> 
 
     <!-- footer -->
     <footer class="w3l-footer-29-main">
@@ -252,70 +332,7 @@ Author URL: http://w3layouts.com
     <script src="assets/js/lightbox-plus-jquery.min.js"></script>
     <!-- libhtbox -->
 
-    <!-- counter for stats -->
-    <script src="assets/js/counter.js"></script>
-    <!-- //counter for stats -->
-
-    <!-- testimonial script -->
-    <script>
-        $(document).ready(function () {
-
-            $('.client-single').on('click', function (event) {
-                event.preventDefault();
-
-                var active = $(this).hasClass('active');
-
-                var parent = $(this).parents('.testi-wrap');
-
-                if (!active) {
-                    var activeBlock = parent.find('.client-single.active');
-
-                    var currentPos = $(this).attr('data-position');
-
-                    var newPos = activeBlock.attr('data-position');
-
-                    activeBlock.removeClass('active').removeClass(newPos).addClass('inactive').addClass(
-                        currentPos);
-                    activeBlock.attr('data-position', currentPos);
-
-                    $(this).addClass('active').removeClass('inactive').removeClass(currentPos).addClass(
-                        newPos);
-                    $(this).attr('data-position', newPos);
-
-                }
-            });
-
-        }(jQuery));
-    </script>
-    <!-- //testimonial script -->
-
-    <!-- MENU-JS -->
-    <script>
-        $(window).on("scroll", function () {
-            var scroll = $(window).scrollTop();
-
-            if (scroll >= 80) {
-                $("#site-header").addClass("nav-fixed");
-            } else {
-                $("#site-header").removeClass("nav-fixed");
-            }
-        });
-
-        //Main navigation Active Class Add Remove
-        $(".navbar-toggler").on("click", function () {
-            $("header").toggleClass("active");
-        });
-        $(document).on("ready", function () {
-            if ($(window).width() > 991) {
-                $("header").removeClass("active");
-            }
-            $(window).on("resize", function () {
-                if ($(window).width() > 991) {
-                    $("header").removeClass("active");
-                }
-            });
-        });
-    </script>
+    
     <!-- //MENU-JS -->
 
     <!-- disable body scroll which navbar is in active -->

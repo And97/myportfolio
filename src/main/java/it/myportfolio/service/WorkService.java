@@ -1,6 +1,7 @@
 package it.myportfolio.service;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,10 @@ public class WorkService {
         } else {
             return null; 
         }
+    }
+	
+	public  List<Work> getAllWork() {;
+        return  workRepository.findAll();
     }
 
 }

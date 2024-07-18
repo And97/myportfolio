@@ -54,8 +54,8 @@ public class ImageController {
 //		}
 //		return ResponseEntity.ok(ImageDTO.fromImage(image));
 //	}
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	
+	// @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+
 	@GetMapping()
 	public ResponseEntity<byte[]> getImageById(@RequestParam Long id) throws IOException {
 
@@ -68,29 +68,26 @@ public class ImageController {
 			BufferedImage watermarkedImage = ThumbnailGenerator.addTextWatermark(sourceImage);
 
 			// Converti BufferedImage in array di byte
-	        byte[] imageBytes = convertImageToBytes(watermarkedImage);
+			byte[] imageBytes = convertImageToBytes(watermarkedImage);
 
-	        return ResponseEntity.status(HttpStatus.OK)
-	                .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION)
-	                .contentType(MediaType.IMAGE_PNG)
-	                .body(imageBytes);
+			return ResponseEntity.status(HttpStatus.OK).header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION)
+					.contentType(MediaType.IMAGE_PNG).body(imageBytes);
 		}
 		return ResponseEntity.notFound().build();
 
 	}
-	// Metodo per convertire BufferedImage in byte[]
-    private byte[] convertImageToBytes(BufferedImage image) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(image, "jpeg", baos);  // Cambia "png" a seconda del tipo di immagine
-        } catch (IOException e) {
-            // Gestione dell'errore se necessario
-            e.printStackTrace();
-        }
-        return baos.toByteArray();
-    }
 
-	
+	// Metodo per convertire BufferedImage in byte[]
+	private byte[] convertImageToBytes(BufferedImage image) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		try {
+			ImageIO.write(image, "jpeg", baos); // Cambia "png" a seconda del tipo di immagine
+		} catch (IOException e) {
+			// Gestione dell'errore se necessario
+			e.printStackTrace();
+		}
+		return baos.toByteArray();
+	}
 
 	// OK
 	// permette l'aggiunta di una lista di Image, è necessario specificare su quale
@@ -100,7 +97,7 @@ public class ImageController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<String> addImagesToWork(@RequestBody List<ImageDTO> imagesDTO, @RequestParam Long workId)
 			throws IOException {
-		//System.out.println(workId);
+		// System.out.println(workId);
 		if (workId == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Work ID is empty");
 		}
@@ -131,24 +128,22 @@ public class ImageController {
 	// Elimina una lista di immagini da un work
 	@DeleteMapping()
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<String> deleteImage(@RequestBody List<Long> ImagesId) {
-		for (Long id : ImagesId) {
-			imageService.deleteImageById(id);
-		}
+	public ResponseEntity<String> deleteImage(@RequestBody ImageDTO imageDTO) {
+
+		imageService.deleteImageById(imageDTO.getId());
+
 		return ResponseEntity.status(HttpStatus.OK).body("Images delete");
 	}
 
 	// data una lista di immagini permette la modifica dei parametri di un'immagine
 	@PutMapping()
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<String> updateImage(@RequestBody List<ImageDTO> imagesDTO) {
-		for (ImageDTO imageDTO : imagesDTO) {
-			System.out.println(imageDTO.getId());
-			ImageProject updatedImage = Mapper.toEntity(ImageProject.class, imageDTO);
-			imageService.updateImage(updatedImage.getId(), updatedImage);
-		}
+	public ResponseEntity<String> updateImage(@RequestBody ImageDTO imageDTO) {
+
+		ImageProject updatedImage = Mapper.toEntity(ImageProject.class, imageDTO);
+		imageService.updateImage(updatedImage.getId(), updatedImage);
+
 		return ResponseEntity.status(HttpStatus.OK).body("Images update");
 	}
-
 
 }

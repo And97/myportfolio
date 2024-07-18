@@ -2,6 +2,7 @@ package it.myportfolio.controller;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -51,8 +52,8 @@ public class WorkController {
 	// restituisce tutti i work per cui un utente ha l'accesso in visualizzazione
 	// senza riferimento alle Image
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	@GetMapping("/all")
-	public ResponseEntity<Set<WorkDTO>> getVisibleWorksByUserId(HttpServletRequest request) {
+	@GetMapping("/mywork")
+	public ResponseEntity<Set<WorkDTO>> getVisibleWorksByUserId(HttpServletRequest request ) {
 		String token = jwtUtils.getJwtFromCookies(request);
 		if (jwtUtils.validateJwtToken(token)) {
 			Long userId = (Long) jwtUtils.getUserIdFromJwtToken(token);
@@ -74,6 +75,25 @@ public class WorkController {
 		}
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/all")
+	public ResponseEntity<Set<WorkDTO>> getAllWorks(HttpServletRequest request ) {
+		String token = jwtUtils.getJwtFromCookies(request);
+		if (jwtUtils.validateJwtToken(token)) {
+			
+			List<Work> works = workService.getAllWork();
+			Set<WorkDTO> workDtos = new HashSet<>();
+
+			for (Work work : works) {
+				workDtos.add(WorkDTO.fromWork(work));
+			}
+
+			return ResponseEntity.ok(workDtos);
+
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
+	}
 	
 	// creazione di un nuovo work da parte di un admin
 	@PostMapping()

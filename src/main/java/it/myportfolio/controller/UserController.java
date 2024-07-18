@@ -1,5 +1,7 @@
 package it.myportfolio.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.myportfolio.dto.UserDTO;
 import it.myportfolio.dto.UserPersonalDetailsDTO;
 import it.myportfolio.mapper.Mapper;
 import it.myportfolio.model.User;
@@ -33,13 +36,12 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private CartService cartService;
-	
+
 	@Autowired
 	WorkService workService;
-
 
 	@Autowired
 	JwtUtils jwtUtils;
@@ -59,10 +61,42 @@ public class UserController {
 		}
 	}
 
+	// restiuisce anagrafica utente
+	@GetMapping("/all")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<List<UserDTO>> getAllUser(HttpServletRequest request) {
+		String token = jwtUtils.getJwtFromCookies(request);
+		if (jwtUtils.validateJwtToken(token)) {
+			List <User> users= userService.getAllUser();
+			List <UserDTO> usersDTO = new ArrayList<>();
+			for (User user : users) {
+				UserDTO userDTO =	Mapper.toDTO(UserDTO.class, user);
+				userDTO.setShopableImage(user.getVisibleWorks());
+				usersDTO.add(userDTO);
+			}
+			return ResponseEntity.ok(usersDTO);
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
+	}
+
+//	// restiuisce anagrafica utente
+//	@GetMapping("/getuser")
+//	@PreAuthorize("hasRole('ADMIN')")
+//	public ResponseEntity<UserDTO> getPersonalDetailsById(HttpServletRequest request, @RequestParam Long id) {
+//		String token = jwtUtils.getJwtFromCookies(request);
+//		if (jwtUtils.validateJwtToken(token)) {
+//			Optional<User> user = userService.getUserById(id);
+//			return ResponseEntity.ok(Mapper.toDTO(UserDTO.class, user.get()));
+//		} else {
+//			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//		}
+//	}
+
 	// permette aggiornamento dei dati personali di un utente
 	@PutMapping()
 	@PreAuthorize("hasRole('USER')")
-	public ResponseEntity<UserPersonalDetailsDTO> personalDetails(HttpServletRequest request,
+	public ResponseEntity<UserPersonalDetailsDTO> updatePersonalDetails(HttpServletRequest request,
 			@RequestBody UserPersonalDetailsDTO userDTO) {
 		String token = jwtUtils.getJwtFromCookies(request);
 		if (jwtUtils.validateJwtToken(token)) {
@@ -77,14 +111,14 @@ public class UserController {
 		}
 	}
 
-	// permette la cancellazione di un utente dato un username (disabilita l'utenza per non perdere i suoi dati)
+	// permette la cancellazione di un utente dato un username (disabilita l'utenza
+	// per non perdere i suoi dati)
 	@DeleteMapping()
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<String> deleteUserByUsername(HttpServletRequest request,
-			@RequestParam String username) {
+	public ResponseEntity<String> deleteUserByUsername(HttpServletRequest request, @RequestParam String username) {
 		String token = jwtUtils.getJwtFromCookies(request);
 		if (jwtUtils.validateJwtToken(token)) {
-			
+
 			User user = userService.getUserByUsername(username);
 			if (user == null) {
 				return ResponseEntity.notFound().build();
@@ -94,21 +128,20 @@ public class UserController {
 			user.setVisibleWorks(null);
 			user.setEnable(false);
 			userService.addUser(user);
-			
+
 			Set<Work> works = userService.findVisibleWorksByUserId(user.getId());
-			
-			//rimuovo la visualizzazione dei lavori ad un user e aggiorno il db
+
+			// rimuovo la visualizzazione dei lavori ad un user e aggiorno il db
 			for (Work work : works) {
 				work.getUsers().remove(user);
 				workService.addWork(work);
 			}
-			
-			//elimino il carrello
+
+			// elimino il carrello
 			cartService.deleteCartByUserId(user.getId());
-			
-			
+
 			return ResponseEntity.status(HttpStatus.OK).body("Username " + username + " disable");
-			
+
 		} else {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}

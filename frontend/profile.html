@@ -54,7 +54,7 @@ Author URL: http://w3layouts.com
                             <a class="nav-link" href="contact.html">Contatti</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Login/Registrazione</a>
+                            <a class="nav-link" href="#">Profilo</a>
                         </li>
                     </ul>
                 </div>
@@ -82,10 +82,10 @@ Author URL: http://w3layouts.com
      <section class="inner-banner py-5">
         <div class="w3l-breadcrumb py-lg-5">
             <div class="container pt-sm-5 pt-4 pb-sm-4">
-                <h4 class="inner-text-title font-weight-bold pt-5">Login/Registrazione</h4>
+                <h4 class="inner-text-title font-weight-bold pt-5">Profilo</h4>
                 <ul class="breadcrumbs-custom-path">
                     <li><a href="index.html">Home</a></li>
-                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>Login/Registrazione</li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>Profilo</li>
                 </ul>
             </div>
         </div>
@@ -97,43 +97,56 @@ Author URL: http://w3layouts.com
             <div class="mx-auto pt-lg-4 pt-md-5 pt-4" style="max-width:1000px">
                 <div class="row contact-block">
 
-                    <div class="col-md-6 contact-left mt-md-0 mt-4">
-                        <h3 class="title-style">Login</h3><br>
-                        <form action="#" method="post" class="signin-form">
-                            <div class="input-grids">
-                                <input type="text" name="username" id="username" placeholder="Username*"
-                                    class="contact-input" required="yes" />
-                                <input type="password" name="password" id="password" placeholder="Password*"
-                                    class="contact-input" required="yes" />
-                            </div>
-                            <hr>
-                            <button class="btn btn-style btn-style-primary-2">Accedi</button>
-                        </form>
-                    </div>
-                    
+
                     <div class="col-md-6 contact-right mt-md-0 mt-4">
-                        <h3 class="title-style">Registrazione</h3><br>
+                        <h3 class="title-style">Cambio password</h3><br>
                         <form action="#" method="post" class="signin-form">
                             <div class="input-grids">
-                                <input type="text" name="name" id="name" placeholder="Nome*"
+                               
+                                <input type="password" name="old_password" id="old_password" placeholder="Vecchia Password*"
                                     class="contact-input" required="yes" />
-                                    <input type="text" name="surname" id="surname" placeholder="Cogmome*"
-                                    class="contact-input" required="" />
-                                <input type="email" name="email" id="email" placeholder="Email*"
+
+                                <input type="password" name="new_password" id="new_password" placeholder="Nuova Password*"
                                     class="contact-input" required="yes" />
-                                <input type="text" name="username" id="username" placeholder="Username*"
-                                    class="contact-input" required="" />
-                                <input type="password" name="password" id="password" placeholder="Password*"
+                                
+                                <input type="password" name="nnew_password" id="nnew_password" placeholder="Ripeti Password*"
                                     class="contact-input" required="yes" />
                             </div>
                             <hr>
-                            <button class="btn btn-style btn-style-primary-2">Registrati</button>
+                            <button class="btn btn-style btn-style-primary-2">Cambia password</button>
                         </form>
                     </div>
+
+                    <div class="col-md-6 contact-left mt-md-0 mt-4">
+                        <h3 class="title-style">Aggiorna i tuoi dati</h3><br>
+                        <form action="https://sendmail.w3layouts.com/submitForm" method="post" class="signin-form">
+                            <div class="input-grids">
+
+                                <input type="hidden" name="id" id="id" placeholder="$id"/>
+                                <input type="text" name="username" id="username" placeholder="$username"
+                                    class="contact-input" disabled="yes" />
+
+                                <input type="email" name="email" id="email" placeholder="$email"
+                                    class="contact-input" disabled="yes" />
+
+                                <input type="text" name="surname" id="surname" placeholder="$surname"
+                                    class="contact-input" required="yes"/>
+
+                                <input type="text" name="name" id="name" placeholder="$name"
+                                    class="contact-input" required="yes" />
+                            
+                               
+                            </div>
+                            <hr>
+                            <button class="btn btn-style btn-style-primary-2">Modifica</button>
+                        </form>
+                    </div>
+                   
+                  
                 </div>
             </div>
         </div>
-    </section>  
+    </section>    
 
 
      <!-- call section -->
