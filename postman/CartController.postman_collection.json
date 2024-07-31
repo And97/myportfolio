@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "50095091-ef02-4179-b793-ca452e73277e",
+		"name": "CartController",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9325608"
+	},
+	"item": [
+		{
+			"name": "showMyCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWQiOiIyIiwiaWF0IjoxNzE0Mzk1NTM4LCJleHAiOjE3MTQ0ODE5Mzh9.fY0y6Btke3k5V4Ho7f70LToBvNJE4gQ1bELeQQ3LPlM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteImageInCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWQiOiIyIiwiaWF0IjoxNzE0MzkxNTE5LCJleHAiOjE3MTQ0Nzc5MTl9.1UdUYodyNolgg8c-mfZjvpXtqQu-QpZy6qrU3YpQftU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cart?shopableImageId=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cart"
+					],
+					"query": [
+						{
+							"key": "shopableImageId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "emptyCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlkIjoiMyIsImlhdCI6MTcxNDM4MDkzOSwiZXhwIjoxNzE0NDY3MzM5fQ.8GRJC5elMDK8Z84Wm7Km0uIwU6uHrePNWtlW7AV3YGk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cart/empty",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cart",
+						"empty"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addImageToMyCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWQiOiIyIiwiaWF0IjoxNzE0Mzk2NDcxLCJleHAiOjE3MTQ0ODI4NzF9.benx4HpUD1b6iT8WB6dUw5ZQ64LXwYcMNY4PZtN8rOs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cart?shopableImageId=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cart"
+					],
+					"query": [
+						{
+							"key": "shopableImageId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

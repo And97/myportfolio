@@ -1,0 +1,36 @@
+{
+	"info": {
+		"_postman_id": "f80ca631-747b-41d9-bbfb-debe1b301830",
+		"name": "ThumbnailController",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9325608"
+	},
+	"item": [
+		{
+			"name": "generateThumbnail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/thumbanail?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"thumbanail"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

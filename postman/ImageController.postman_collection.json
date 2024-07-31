@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "0f1af6cc-2022-4ce6-8d58-1856db6a3aea",
+		"name": "ImageController",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9325608"
+	},
+	"item": [
+		{
+			"name": "getImagebyId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoiMSIsImlhdCI6MTcxNDI5NDM3NiwiZXhwIjoxNzE0MzgwNzc2fQ.jCYL-CF8r9VL-_lID_lqHSz24pm-MRZXm_DH3ppb-bs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/image?id=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"image"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addNewImage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoiMSIsImlhdCI6MTcxNDI5NTc1MSwiZXhwIjoxNzE0MzgyMTUxfQ.BAt8lmieC1n7Yxg-nL-BmTSVetbm5WE4WF6huzdRabc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n    \"label\": \"POSTMANphoto1\",\r\n    \"thumbnailURL\": \"C:/Users/Andrea/Desktop/xxl.jpg\",\r\n    \"url\": \"C:/Users/Andrea/Desktop/thumb/xxl.jpg\"\r\n    },\r\n    {\r\n    \"label\": \"POSTMANphoto1\",\r\n    \"thumbnailURL\": \"C:/Users/Andrea/Desktop/xxl.jpg\",\r\n    \"url\": \"C:/Users/Andrea/Desktop/thumb/xxl.jpg\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/image?workId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"image"
+					],
+					"query": [
+						{
+							"key": "workId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateImagebyId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoiMSIsImlhdCI6MTcxNDI5NTIxMywiZXhwIjoxNzE0MzgxNjEzfQ.UJ6X9fOv_JbQdUqYHmnAP4vmL2FvfI0WjQyLvhx0HSo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n    \"id\":\"1\",\r\n    \"label\": \"update\",\r\n    \"thumbnailURL\": \"update\",\r\n    \"url\": \"update\"\r\n    },\r\n    {\r\n    \"id\":\"2\",\r\n    \"label\": \"update\",\r\n    \"thumbnailURL\": \"update\",\r\n    \"url\": \"update\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/image",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"image"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "4",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteImagebyId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoiMSIsImlhdCI6MTcxNDI5NTIxMywiZXhwIjoxNzE0MzgxNjEzfQ.UJ6X9fOv_JbQdUqYHmnAP4vmL2FvfI0WjQyLvhx0HSo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[1,2,3]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/image",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"image"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

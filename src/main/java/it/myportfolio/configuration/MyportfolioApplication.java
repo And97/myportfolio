@@ -37,6 +37,7 @@ public class MyportfolioApplication {
 
 	public static void main(String[] args) throws java.io.IOException {
 		SpringApplication.run(MyportfolioApplication.class, args);
+
 		
 //		ImageProject a = new ImageProject();
 //		a.setId(1L);

@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "4f2d5579-eb42-40c5-8ca9-6d275087534a",
+		"name": "WorkController",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9325608"
+	},
+	"item": [
+		{
+			"name": "addWork",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoiMSIsImlhdCI6MTcxNDI5NTc1MSwiZXhwIjoxNzE0MzgyMTUxfQ.BAt8lmieC1n7Yxg-nL-BmTSVetbm5WE4WF6huzdRabc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"photo for yyy\",\r\n    \"company\": \"yyy\",\r\n    \"completionDate\": \"2024-02-23T05:10:00.000+00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/work",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"work"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMyWork",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWQiOiIyIiwiaWF0IjoxNzE0ODEzODM1LCJleHAiOjE3MTQ5MDAyMzV9.oDO1l_5YtqunkC_4Jvz-L0zB57vSfx5_WFsupPJGH8E",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/work/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"work",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getWorkById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWQiOiIyIiwiaWF0IjoxNzE0NjQ3NDU0LCJleHAiOjE3MTQ3MzM4NTR9.1KBz5MCiI26LLlDJEFqaCDli4h816NZ7UU_GUhxch9U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/work?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"work"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateWork",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoiMSIsImlhdCI6MTcxNDIyMjM0MCwiZXhwIjoxNzE0MzA4NzQwfQ.Jfl_ojneA5xBr-sydeF9xOuNq83lXzrx_nbDGt7SWjQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"photo for xxx\",\r\n    \"company\": \"xxx\",\r\n    \"completionDate\": \"2024-02-23T05:10:00.000+00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/work?id=30",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"work"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteWorkById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoiMSIsImlhdCI6MTcxNDIyMjE5NiwiZXhwIjoxNzE0MzA4NTk2fQ.1IR6wiUv2tLhcs-uKhOgxtFMho-82I58GG8fSJKXIF0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/work?id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"work"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateWorkVsibility",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoiMSIsImlhdCI6MTcxNDIyNDUwOSwiZXhwIjoxNzE0MzEwOTA5fQ.dW7VcAT-TOG-idTU4OkXtW7DD8Ns5MXtccXk47wxXjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[1, 2, 3 ]\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/work/visible-works?userId=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"work",
+						"visible-works"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
