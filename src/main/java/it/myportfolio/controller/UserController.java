@@ -54,8 +54,9 @@ public class UserController {
 		if (jwtUtils.validateJwtToken(token)) {
 			Long id = (Long) jwtUtils.getUserIdFromJwtToken(token);
 			Optional<User> user = userService.getUserById(id);
-
-			return ResponseEntity.ok(Mapper.toDTO(UserPersonalDetailsDTO.class, user.get()));
+			UserPersonalDetailsDTO userDTO = Mapper.toDTO(UserPersonalDetailsDTO.class, user.get());
+			userDTO.setRole(user.get().getRoles());
+			return ResponseEntity.ok(userDTO);
 		} else {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}

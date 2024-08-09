@@ -81,6 +81,7 @@ public class AuthController {
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(
+				//new UserInfoResponse(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles, jwtCookie.toString()));
 				new UserInfoResponse(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
 	}
 
@@ -168,9 +169,6 @@ public class AuthController {
 				UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
 				ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
-
-//				List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
-//						.collect(Collectors.toList());
 
 				return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
 						.body("Password changed");

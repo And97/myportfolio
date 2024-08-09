@@ -49,7 +49,7 @@ public class ShopController {
 	JwtUtils jwtUtils;
 
 	// restituisce gli ordini di tutti gli utenti
-	@GetMapping("/allorder")
+	@GetMapping("/all")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<List<SalesOrderDTO>> getAllOrder(HttpServletRequest request) {
 
@@ -143,53 +143,63 @@ public class ShopController {
 			float price = 0;
 			int piece = 0;
 			List<ShopableImageDTO> shopableImageDTOs = new ArrayList<>();
+			List<Long> SoldId = new ArrayList<>();
 			for (ShopableImage shopableImage : shopableImages) {
-				ShopableImageDTO shopableImageDTO = Mapper.toDTO(ShopableImageDTO.class, shopableImage);
-				shopableImageDTO.setID(shopableImage.getId());
-				shopableImageDTOs.add(shopableImageDTO);
-				price = price + shopableImage.getPrice();
-				piece++;
-				shopableImage.setSold(true);
-			}
-
-			List<ShopableImage> images = new ArrayList<>();
-			List<Long> IID = new ArrayList<>();
-			for (ShopableImage shopableImage : shopableImages) {
-				images.add(shopableImage);
-				IID.add(shopableImage.getId());
-			}
-
-			cartService.emptyCart(user);
-
-			SalesOrder order = new SalesOrder();
-			order.setTimestamp(new Date());
-			order.setUser(user);
-			order.setPurchasedImage(images);
-
-			salesOrderService.addSalesOrder(order);
-
-			DetailsSalesOrderDTO detailsSalesOrderDTO = new DetailsSalesOrderDTO();
-			detailsSalesOrderDTO.setId(order.getId());
-			detailsSalesOrderDTO.setTimestamp(order.getTimestamp());
-			detailsSalesOrderDTO.setTotalPrice(price);
-			detailsSalesOrderDTO.setPurchaseImage(shopableImageDTOs);
-			// orderDTO.setUserID(order.getUser().getId());
-			detailsSalesOrderDTO.setUsername(order.getUser().getUsername());
-			detailsSalesOrderDTO.setPiece(piece);
-
-			String hash = BlockchainTransactionService.registry_transaction(userId, IID, new java.util.Date());
-
-			int i = 0;
-			while (hash == null) {
-				if (i == 3) {
-					break;
+				if (!shopableImage.isSold()) {
+					ShopableImageDTO shopableImageDTO = Mapper.toDTO(ShopableImageDTO.class, shopableImage);
+					shopableImageDTO.setID(shopableImage.getId());
+					shopableImageDTOs.add(shopableImageDTO);
+					price = price + shopableImage.getPrice();
+					piece++;
+					shopableImage.setSold(true);
+				} else {
+					SoldId.add(shopableImage.getId());
 				}
-				hash = BlockchainTransactionService.verify_hash(hash);
-				i++;
+
 			}
 
-			detailsSalesOrderDTO.setHash(hash);
-			return ResponseEntity.ok(detailsSalesOrderDTO);
+			if (!SoldId.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Product with ID: " + SoldId.toString()+ " have already been sold");
+			} else {
+				List<ShopableImage> images = new ArrayList<>();
+				List<Long> IID = new ArrayList<>();
+				for (ShopableImage shopableImage : shopableImages) {
+					images.add(shopableImage);
+					IID.add(shopableImage.getId());
+				}
+
+				cartService.emptyCart(user);
+
+				SalesOrder order = new SalesOrder();
+				order.setTimestamp(new Date());
+				order.setUser(user);
+				order.setPurchasedImage(images);
+
+				salesOrderService.addSalesOrder(order);
+
+				DetailsSalesOrderDTO detailsSalesOrderDTO = new DetailsSalesOrderDTO();
+				detailsSalesOrderDTO.setId(order.getId());
+				detailsSalesOrderDTO.setTimestamp(order.getTimestamp());
+				detailsSalesOrderDTO.setTotalPrice(price);
+				detailsSalesOrderDTO.setPurchaseImage(shopableImageDTOs);
+				// orderDTO.setUserID(order.getUser().getId());
+				detailsSalesOrderDTO.setUsername(order.getUser().getUsername());
+				detailsSalesOrderDTO.setPiece(piece);
+
+				String hash = BlockchainTransactionService.registry_transaction(userId, IID, new java.util.Date());
+
+				int i = 0;
+				while (hash == null) {
+					if (i == 3) {
+						break;
+					}
+					hash = BlockchainTransactionService.verify_hash(hash);
+					i++;
+				}
+
+				detailsSalesOrderDTO.setHash(hash);
+				return ResponseEntity.ok(detailsSalesOrderDTO);
+			}
 
 		} else {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -200,7 +210,7 @@ public class ShopController {
 	// OK
 	// verifico che l'id utente nel salesOrder e quello dell'utente siano lo stesso
 	@GetMapping("/orderdetail")
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<DetailsSalesOrderDTO> getOrderById(HttpServletRequest request, @RequestParam Long id) {
 
 		String token = jwtUtils.getJwtFromCookies(request);

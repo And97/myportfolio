@@ -13,7 +13,7 @@ public class DetailsWorkDTO {
 	private String title;
 	private String company;
 	private Date completionDate;
-	private Set<SimpleImageDTO> images;
+	private Set<Long> imagesId;
 
 	public Long getID() {
 		return ID;
@@ -48,12 +48,12 @@ public class DetailsWorkDTO {
 	}
 
 
-	public Set<SimpleImageDTO> getImages() {
-		return images;
+	public Set<Long> getImages() {
+		return imagesId;
 	}
 
-	public void setImages(Set<SimpleImageDTO> images) {
-		this.images = images;
+	public void setImages(Set<Long> imagesId) {
+		this.imagesId = imagesId;
 	}
 
 	public static DetailsWorkDTO fromWork(Work work) {
@@ -63,15 +63,10 @@ public class DetailsWorkDTO {
 		dto.setCompany(work.getCompany());
 		dto.setCompletionDate(work.getCompletionDate());
 		Set<ImageProject> images = work.getImage();
-		Set<SimpleImageDTO> imagesToDTO =  new HashSet<SimpleImageDTO>();
+		Set<Long> iDimagesToDTO =  new HashSet<Long>();
 		for (ImageProject imageProject : images) {
-			SimpleImageDTO simpleImageDTO = new SimpleImageDTO();
-			simpleImageDTO.setId(imageProject.getId());
-			simpleImageDTO.setLabel(imageProject.getLabel());
-			simpleImageDTO.setThumbnailURL(imageProject.getThumbnailURL());
-			imagesToDTO.add(simpleImageDTO);
+			iDimagesToDTO.add(imageProject.getId());
 		}
-		dto.setImages(imagesToDTO);
 		return dto;
 	}
 

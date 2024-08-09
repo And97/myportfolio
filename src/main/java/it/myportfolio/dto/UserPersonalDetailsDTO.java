@@ -1,11 +1,16 @@
 package it.myportfolio.dto;
 
+import java.util.Set;
+
+import it.myportfolio.model.Role;
+
 public class UserPersonalDetailsDTO {
 
 	private Long Id;
 	private String surname;
 	private String name;
 	private String email;
+	private Set<Role>  role;
 
 	public Long getId() {
 		return Id;
@@ -38,5 +43,15 @@ public class UserPersonalDetailsDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Set<Role>  getRole() {
+		return role;
+	}
+
+	public void setRole(Set<Role> set) {
+		this.role = set;
+	}
+	
+	
 
 }

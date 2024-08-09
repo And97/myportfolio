@@ -45,15 +45,13 @@ public class WorkController {
 	@Autowired
 	JwtUtils jwtUtils;
 
-	
-	
 	// fare anche controller per admin che possa fare id utente e avere gli work a
 	// qui ha accesso
 	// restituisce tutti i work per cui un utente ha l'accesso in visualizzazione
 	// senza riferimento alle Image
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@GetMapping("/mywork")
-	public ResponseEntity<Set<WorkDTO>> getVisibleWorksByUserId(HttpServletRequest request ) {
+	public ResponseEntity<Set<WorkDTO>> getVisibleWorksByUserId(HttpServletRequest request) {
 		String token = jwtUtils.getJwtFromCookies(request);
 		if (jwtUtils.validateJwtToken(token)) {
 			Long userId = (Long) jwtUtils.getUserIdFromJwtToken(token);
@@ -77,15 +75,18 @@ public class WorkController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/all")
-	public ResponseEntity<Set<WorkDTO>> getAllWorks(HttpServletRequest request ) {
+	public ResponseEntity<Set<WorkDTO>> getAllWorks(HttpServletRequest request) {
 		String token = jwtUtils.getJwtFromCookies(request);
 		if (jwtUtils.validateJwtToken(token)) {
-			
+
 			List<Work> works = workService.getAllWork();
 			Set<WorkDTO> workDtos = new HashSet<>();
 
 			for (Work work : works) {
-				workDtos.add(WorkDTO.fromWork(work));
+				if (work.getID() != 1 && work.getCompany() != "Shop") {
+					workDtos.add(WorkDTO.fromWork(work));
+				}
+					
 			}
 
 			return ResponseEntity.ok(workDtos);
@@ -94,7 +95,7 @@ public class WorkController {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}
 	}
-	
+
 	// creazione di un nuovo work da parte di un admin
 	@PostMapping()
 	@PreAuthorize("hasRole('ADMIN')")
@@ -103,16 +104,16 @@ public class WorkController {
 		String token = jwtUtils.getJwtFromCookies(request);
 		System.out.println("token");
 		if (jwtUtils.validateJwtToken(token)) {
-			
+
 			Long id = (Long) jwtUtils.getUserIdFromJwtToken(token);
 			Optional<User> optionalUser = userService.getUserById(id);
 			User user = optionalUser.get();
-			
+
 			Work work = Mapper.toEntity(Work.class, workDTO);
 			work.getUsers().add(user);
 			Work savedWork = workService.addWork(work);
 			workDTO.setID(savedWork.getID());
-		
+
 			Set<Work> images = user.getVisibleWorks();
 			images.add(work);
 			user.setVisibleWorks(images);
@@ -124,7 +125,6 @@ public class WorkController {
 		}
 	}
 
-	
 	// cancellazione Work da parte di un admin
 	@DeleteMapping()
 	@PreAuthorize("hasRole('ADMIN')")
@@ -142,11 +142,12 @@ public class WorkController {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}
 	}
-	
+
 	// modifica Work da Parte di un Admin
 	@PutMapping()
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<WorkDTO> updateWork(HttpServletRequest request, @RequestBody WorkDTO workDTO, @RequestParam Long id) {
+	public ResponseEntity<WorkDTO> updateWork(HttpServletRequest request, @RequestBody WorkDTO workDTO,
+			@RequestParam Long id) {
 		String token = jwtUtils.getJwtFromCookies(request);
 		if (jwtUtils.validateJwtToken(token)) {
 			Work updatedWork = Mapper.toEntity(Work.class, workDTO);
@@ -161,8 +162,8 @@ public class WorkController {
 		}
 	}
 
-	
-	// restituisce le image contenute in un work passando l'id di un work ( devo
+	// restituisce gli id delle image contenute in un work passando l'id di un work
+	// ( devo
 	// verifica tramite la JOIN QUERY
 	// che l'utente ne abbia realmente accesso)
 	@GetMapping()
@@ -183,8 +184,7 @@ public class WorkController {
 
 	}
 
-	
-	//la relazione è N-N devo fare come sopra
+	// la relazione è N-N devo fare come sopra
 	// lato view avrò una griglia con tutti i possibili lavori metterò e toglierò la
 	// spunta
 	@PatchMapping("/visible-works")

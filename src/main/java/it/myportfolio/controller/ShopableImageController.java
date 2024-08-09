@@ -47,7 +47,8 @@ public class ShopableImageController {
 	private WorkService workService;
 
 	// restuitisce tutte le shoapableimage che possono essere acquistate
-	// isSold=false
+	// isSold=false controllo fatto su query repo
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@GetMapping("/all")
 	public ResponseEntity<List<SimpleShopableImageDTO>> getAllShopableImages() {
 		Iterable<ShopableImage> shopableImages = shopableImageService.getAllShopableImages();
@@ -59,7 +60,28 @@ public class ShopableImageController {
 		}
 		return ResponseEntity.ok(shopableImageDTOs);
 	}
+	
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@GetMapping("/thumb")
+	public ResponseEntity<byte[]> getThumbShopableImageById(@RequestParam Long id) throws IOException {
 
+		ShopableImage shopableImage = shopableImageService.getShopableImageById(id);
+		if (shopableImage != null) {
+
+			BufferedImage sourceImage = ImageIO.read(new File(shopableImage.getThumbnailURL()));
+
+			
+			// Converti BufferedImage in array di byte
+			byte[] imageBytes = convertImageToBytes(sourceImage);
+
+			return ResponseEntity.status(HttpStatus.OK).header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION)
+					.contentType(MediaType.IMAGE_PNG).body(imageBytes);
+		}
+		return ResponseEntity.notFound().build();
+
+	}
+
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@GetMapping()
 	public ResponseEntity<byte[]> getShopableImageById(@RequestParam Long id) throws IOException {
 

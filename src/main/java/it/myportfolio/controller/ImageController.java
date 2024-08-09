@@ -57,6 +57,7 @@ public class ImageController {
 	// @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 
 	@GetMapping()
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<byte[]> getImageById(@RequestParam Long id) throws IOException {
 
 		ImageProject image = imageService.getImageById(id);
@@ -77,6 +78,24 @@ public class ImageController {
 
 	}
 
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")	
+	@GetMapping("/thumb")
+	public ResponseEntity<byte[]> getThumbById(@RequestParam Long id) throws IOException {
+
+		ImageProject image = imageService.getImageById(id);
+		if (image != null) {
+
+			BufferedImage sourceImage = ImageIO.read(new File(image.getThumbnailURL()));
+
+			// Converti BufferedImage in array di byte
+			byte[] imageBytes = convertImageToBytes(sourceImage);
+
+			return ResponseEntity.status(HttpStatus.OK).header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION)
+					.contentType(MediaType.IMAGE_PNG).body(imageBytes);
+		}
+		return ResponseEntity.notFound().build();
+
+	}
 	// Metodo per convertire BufferedImage in byte[]
 	private byte[] convertImageToBytes(BufferedImage image) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -125,17 +144,17 @@ public class ImageController {
 		return ResponseEntity.status(HttpStatus.OK).body("Images added");
 	}
 
-	// Elimina una lista di immagini da un work
+	// Elimina un' immagine da un work
 	@DeleteMapping()
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<String> deleteImage(@RequestBody ImageDTO imageDTO) {
+	public ResponseEntity<String> deleteImage(@RequestParam Long id) {
 
-		imageService.deleteImageById(imageDTO.getId());
+		imageService.deleteImageById(id);
 
 		return ResponseEntity.status(HttpStatus.OK).body("Images delete");
 	}
 
-	// data una lista di immagini permette la modifica dei parametri di un'immagine
+	// data un' immagine permette la modifica dei parametri di un'immagine
 	@PutMapping()
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<String> updateImage(@RequestBody ImageDTO imageDTO) {

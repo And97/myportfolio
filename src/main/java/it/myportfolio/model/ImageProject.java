@@ -21,7 +21,6 @@ public class ImageProject {
 	
 	private String label;
 	
-	@Column(nullable = false)
 	private String URL;
 	
 	private String thumbnailURL;

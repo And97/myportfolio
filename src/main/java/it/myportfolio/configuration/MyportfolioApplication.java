@@ -25,13 +25,10 @@ import it.myportfolio.repository.UserRepository;
 import it.myportfolio.repository.WorkRepository;
 
 
-
-
 @SpringBootApplication
 @ComponentScan(basePackages = {"it.myportfolio.*"})
 @EnableJpaRepositories(basePackages  = "it.myportfolio.repository")
 @EntityScan("it.myportfolio.model")
-//@ComponentScan("it.myportofolio.service")
 
 public class MyportfolioApplication {
 
@@ -73,12 +70,11 @@ public class MyportfolioApplication {
 		
 	    @Override
 	    public void run(String...args) throws Exception {
-	    	Role userRole = new Role(ERole.ROLE_USER);
+	        Role userRole = new Role(ERole.ROLE_USER);
 	    	Role adminRole = new Role(ERole.ROLE_ADMIN);
 	    	roleRepository.save(userRole);
 	    	roleRepository.save(adminRole);
-	    	
-	    	
+	    		
 	    	User admin = new User("admin", "admin@test.it", encoder.encode("admin"), "admin", "admin");
 	    	Set<Role> adminRoles = new HashSet<>();
 	    	adminRoles.add(adminRole);
@@ -87,8 +83,7 @@ public class MyportfolioApplication {
 	    	admin.setEnable(true);
 			
 	    	userRepository.save(admin);
-	    	
-	    	
+	    		
 	    	User user = new User("user", "user@test.it", encoder.encode("user"), "user", "user");
 	    	Set<Role> userRoles = new HashSet<>();
 	    	userRoles.add(userRole);
@@ -101,10 +96,7 @@ public class MyportfolioApplication {
 	    	work.setCompletionDate(new java.util.Date());
 	    	work.setTitle("Shop");
 	    	
-	    	workRepository.save(work);
-	    
-	
-	    	
+	    	workRepository.save(work);  	
 	       
 	    }
 	}
