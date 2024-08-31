@@ -80,12 +80,9 @@ public class ImageController {
 	public ResponseEntity<byte[]> getImageById(@RequestParam Long id, HttpServletRequest request) throws IOException {
 
 		ImageProject image = imageService.getImageById(id);
-
 		if (image != null) {
-
 			String token = jwtUtils.getJwtFromCookies(request);
 			if (jwtUtils.validateJwtToken(token)) {
-
 				Long userId = (Long) jwtUtils.getUserIdFromJwtToken(token);
 				Optional<User> user = userService.getUserById(userId);
 				Work work = workService.getWorkByImageId(userId);
