@@ -28,10 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
 import it.myportfolio.dto.ImageDTO;
 import it.myportfolio.mapper.Mapper;
 import it.myportfolio.model.ImageProject;
+import it.myportfolio.model.User;
 import it.myportfolio.model.Work;
+import it.myportfolio.security.jwt.JwtUtils;
 import it.myportfolio.service.ImageService;
+import it.myportfolio.service.UserService;
 import it.myportfolio.service.WorkService;
 import it.myportfolio.utility.ThumbnailGenerator;
+import jakarta.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -44,41 +48,72 @@ public class ImageController {
 	@Autowired
 	WorkService workService;
 
-//	// OK
-//	@GetMapping
-//	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-//	public ResponseEntity<ImageDTO> getImageById(@RequestParam Long id) {
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	JwtUtils jwtUtils;
+
+//	@GetMapping()
+//	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//	public ResponseEntity<byte[]> getImageById(@RequestParam Long id) throws IOException {
+//
 //		ImageProject image = imageService.getImageById(id);
-//		if (image == null) {
-//			return ResponseEntity.notFound().build();
+//		if (image != null) {
+//
+//			BufferedImage sourceImage = ImageIO.read(new File(image.getURL()));
+//
+//			// Add the watermark using the addTextWatermark function
+//			BufferedImage watermarkedImage = ThumbnailGenerator.addTextWatermark(sourceImage);
+//
+//			// Converti BufferedImage in array di byte
+//			byte[] imageBytes = convertImageToBytes(watermarkedImage);
+//
+//			return ResponseEntity.status(HttpStatus.OK).header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION)
+//					.contentType(MediaType.IMAGE_PNG).body(imageBytes);
 //		}
-//		return ResponseEntity.ok(ImageDTO.fromImage(image));
+//		return ResponseEntity.notFound().build();
 //	}
-	// @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 
 	@GetMapping()
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public ResponseEntity<byte[]> getImageById(@RequestParam Long id) throws IOException {
+	public ResponseEntity<byte[]> getImageById(@RequestParam Long id, HttpServletRequest request) throws IOException {
 
 		ImageProject image = imageService.getImageById(id);
+
 		if (image != null) {
 
-			BufferedImage sourceImage = ImageIO.read(new File(image.getURL()));
+			String token = jwtUtils.getJwtFromCookies(request);
+			if (jwtUtils.validateJwtToken(token)) {
 
-			// Add the watermark using the addTextWatermark function
-			BufferedImage watermarkedImage = ThumbnailGenerator.addTextWatermark(sourceImage);
+				Long userId = (Long) jwtUtils.getUserIdFromJwtToken(token);
+				Optional<User> user = userService.getUserById(userId);
+				Work work = workService.getWorkByImageId(userId);
 
-			// Converti BufferedImage in array di byte
-			byte[] imageBytes = convertImageToBytes(watermarkedImage);
+				if (work.getUsers().contains(user.get())) {
+					BufferedImage sourceImage = ImageIO.read(new File(image.getURL()));
 
-			return ResponseEntity.status(HttpStatus.OK).header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION)
-					.contentType(MediaType.IMAGE_PNG).body(imageBytes);
+					// Add the watermark using the addTextWatermark function
+					BufferedImage watermarkedImage = ThumbnailGenerator.addTextWatermark(sourceImage);
+
+					// Converti BufferedImage in array di byte
+					byte[] imageBytes = convertImageToBytes(watermarkedImage);
+
+					return ResponseEntity.status(HttpStatus.OK)
+							.header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION)
+							.contentType(MediaType.IMAGE_PNG).body(imageBytes);
+				} else {
+					return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+				}
+
+			} else {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+			}
 		}
 		return ResponseEntity.notFound().build();
-
 	}
 
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")	
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@GetMapping("/thumb")
 	public ResponseEntity<byte[]> getThumbById(@RequestParam Long id) throws IOException {
 
@@ -96,6 +131,7 @@ public class ImageController {
 		return ResponseEntity.notFound().build();
 
 	}
+
 	// Metodo per convertire BufferedImage in byte[]
 	private byte[] convertImageToBytes(BufferedImage image) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();

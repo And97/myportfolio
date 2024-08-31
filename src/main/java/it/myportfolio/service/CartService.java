@@ -95,21 +95,13 @@ public class CartService {
 	}
 
 	
-	//qui
-	
 	public Cart removeToCart(User user, Long shopableImageId) {
 		
 		Optional<Cart> optionalCart = cartRepository.getCartByUser(user);
-//		if (optionalCart.isEmpty()) {
-//			Cart cartToSave = new Cart();
-//			cartToSave.setUser(user);
-//		}
-
 		ShopableImage shopableImage = shopableImageRepository.findById(shopableImageId).get();
 		Cart cart = optionalCart.get();
 		cart.getImages().remove(shopableImage);
-		
-		
+	
 		shopableImage.getCart().remove(cart);
 		shopableImageRepository.save(shopableImage);
 		

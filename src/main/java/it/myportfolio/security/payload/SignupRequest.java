@@ -1,16 +1,13 @@
 package it.myportfolio.security.payload;
 
-import java.util.Set;
 
 public class SignupRequest {
   
 	
-    private String username;
+	private String username;
  
     private String email;
-    
-    private Set<String> role;
-    
+        
     private String surname;
     
     private String name;
@@ -41,13 +38,13 @@ public class SignupRequest {
         this.password = password;
     }
     
-    public Set<String> getRole() {
-      return this.role;
-    }
-    
-    public void setRole(Set<String> role) {
-      this.role = role;
-    }
+//    public Set<String> getRole() {
+//      return this.role;
+//    }
+//    
+//    public void setRole(Set<String> role) {
+//      this.role = role;
+//    }
 
 	public String getSurname() {
 		return surname;
@@ -65,11 +62,11 @@ public class SignupRequest {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "SignupRequest [username=" + username + ", email=" + email + ", role=" + role + ", surname=" + surname
-				+ ", name=" + name + ", password=" + password + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "SignupRequest [username=" + username + ", email=" + email + ", role=" + role + ", surname=" + surname
+//				+ ", name=" + name + ", password=" + password + "]";
+//	}
     
 	
     

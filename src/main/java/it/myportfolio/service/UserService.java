@@ -61,16 +61,6 @@ public class UserService {
 		return userRepository.findVisibleWorksByUserId(id);
 	}
 	
-//	public Boolean checkEmail(String email) {
-//		if (userRepository.findByEmail(email).isEmpty()) {
-//			System.out.println("utente non trovato con mail fornita");
-//			return true;
-//		}
-//		System.out.println("utente TROVATO con mail fornita");
-//		return false;
-//			
-//	}
-	
 		
 	
 }

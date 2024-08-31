@@ -23,8 +23,6 @@ import it.myportfolio.service.UserDetailsServiceImpl;
 //@EnableWebSecurity deprecated
 @Configuration
 @EnableMethodSecurity
-
-
 public class WebSecurityConfig {
 
 			
@@ -92,7 +90,6 @@ public class WebSecurityConfig {
 		
 			return http.build();
 		}
-	
 }
 
 

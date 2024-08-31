@@ -41,8 +41,6 @@ import it.myportfolio.security.payload.UserInfoResponse;
 import it.myportfolio.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
-//for Angular Client (withCredentials)
-//@CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials="true")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")

@@ -4,7 +4,6 @@ public class SimpleShopableImageDTO {
 	
 	private Long Id;
 	private String label;
-	//private String thumbnailURL;
 	private float price;
 
 
@@ -20,13 +19,7 @@ public class SimpleShopableImageDTO {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-
-//	public String getThumbnailURL() {
-//		return thumbnailURL;
-//	}
-//	public void setThumbnailURL(String thumbnailURL) {
-//		this.thumbnailURL = thumbnailURL;
-//	}
+	
 	public float getPrice() {
 		return price;
 	}

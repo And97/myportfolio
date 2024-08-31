@@ -15,4 +15,6 @@ public interface WorkRepository extends JpaRepository<Work, Long> {
 	 @Query("SELECT w FROM Work w JOIN w.users u WHERE w.id = :workId AND u.id = :userId")
 	    Optional<Work> findWorkByIdAndUserId(@Param("workId") Long workId, @Param("userId") Long userId);
 	
+	 @Query("SELECT w FROM Work w JOIN w.image i WHERE i.Id = :imageId")
+		Work findWorkByImageId(@Param("imageId") Long imageId);
 }
