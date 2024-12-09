@@ -21,7 +21,7 @@ import it.myportfolio.utility.ThumbnailGenerator;
 
 
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/thumbnail")
 public class ThumbnailController {

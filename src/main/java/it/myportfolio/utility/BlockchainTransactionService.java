@@ -20,25 +20,25 @@ public class BlockchainTransactionService {
 			for (Long id : ImageID) {
 				IID=IID+id.toString()+","; 
 			}
-			
+			IID=IID.substring(0, IID.length()-1);
 			String date = timestamp.toString();
-
+			
 			// Costruisci il comando da eseguire
 			ProcessBuilder pb = new ProcessBuilder("python", scriptPath, UID, IID, date);
-
+			//System.out.println(pb.toString() + pb.command().toString());
 			// Avvia il processo
 			Process process = pb.start();
 
 			// Ottieni l'output del processo
 			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			String line = reader.readLine();
-			System.out.println(line);
+			//System.out.println("LINE: " + line);
 
 			// read any errors from the attempted command
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 			String s;
 			while ((s = stdError.readLine()) != null) {
-				System.out.println(s);
+				System.out.println("stdError:  "+ s );
 			}
 
 			// Attendere il termine dell'esecuzione dello script

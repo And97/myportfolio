@@ -27,7 +27,7 @@ import it.myportfolio.service.CartService;
 import it.myportfolio.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/cart")
 public class CartController {

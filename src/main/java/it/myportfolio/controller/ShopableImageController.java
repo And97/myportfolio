@@ -35,7 +35,7 @@ import it.myportfolio.service.ShopableImageService;
 import it.myportfolio.service.WorkService;
 import it.myportfolio.utility.ThumbnailGenerator;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/shopableimage")
 public class ShopableImageController {
@@ -107,7 +107,7 @@ public class ShopableImageController {
 	private byte[] convertImageToBytes(BufferedImage image) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
-			ImageIO.write(image, "jpeg", baos); // Cambia "png" a seconda del tipo di immagine
+			ImageIO.write(image, "png", baos); // Cambia "png" a seconda del tipo di immagine
 		} catch (IOException e) {
 			// Gestione dell'errore se necessario
 			e.printStackTrace();

@@ -67,6 +67,7 @@ public class DetailsWorkDTO {
 		for (ImageProject imageProject : images) {
 			iDimagesToDTO.add(imageProject.getId());
 		}
+		dto.setImages(iDimagesToDTO);
 		return dto;
 	}
 

@@ -11,7 +11,7 @@ public class UserDTO {
 	private String surname;
 	private String name;
 	private String email;
-	private Set<Work> visibleWork;
+	private Set<WorkDTO> visibleWork;
 	private Role role;
 	
 	public Long getId() {
@@ -46,11 +46,11 @@ public class UserDTO {
 		this.email = email;
 	}
 
-	public Set<Work> getShopableImage() {
+	public Set<WorkDTO> getVisibleWorks() {
 		return this.visibleWork;
 	}
 
-	public void setShopableImage(Set<Work> visibleWork) {
+	public void setVisibleWork(Set<WorkDTO> visibleWork) {
 		this.visibleWork = visibleWork;
 	}
 	

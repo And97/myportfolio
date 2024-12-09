@@ -37,7 +37,7 @@ public class ThumbnailGenerator {
 	            System.out.println("Creating directories for the thumbnail.");
 	            outputFolder.mkdirs();
 	        }
-
+	        System.out.println(photoUrl);
 	        BufferedImage originalImage = ImageIO.read(new File(photoUrl));
 	      
 	        int lengthThumbnail = (int) (originalImage.getWidth() * 0.3);

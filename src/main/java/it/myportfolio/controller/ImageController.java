@@ -37,7 +37,7 @@ import it.myportfolio.service.WorkService;
 import it.myportfolio.utility.ThumbnailGenerator;
 import jakarta.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/image")
 public class ImageController {
@@ -85,7 +85,7 @@ public class ImageController {
 			if (jwtUtils.validateJwtToken(token)) {
 				Long userId = (Long) jwtUtils.getUserIdFromJwtToken(token);
 				Optional<User> user = userService.getUserById(userId);
-				Work work = workService.getWorkByImageId(userId);
+				Work work = workService.getWorkByImageId(id);
 
 				if (work.getUsers().contains(user.get())) {
 					BufferedImage sourceImage = ImageIO.read(new File(image.getURL()));
@@ -133,7 +133,7 @@ public class ImageController {
 	private byte[] convertImageToBytes(BufferedImage image) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
-			ImageIO.write(image, "jpeg", baos); // Cambia "png" a seconda del tipo di immagine
+			ImageIO.write(image, "png", baos); // Cambia "png" a seconda del tipo di immagine
 		} catch (IOException e) {
 			// Gestione dell'errore se necessario
 			e.printStackTrace();
@@ -197,5 +197,16 @@ public class ImageController {
 
 		return ResponseEntity.status(HttpStatus.OK).body("Images update");
 	}
+	
+	@GetMapping("/detail")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<ImageDTO> detailImage(@RequestParam Long id){
+		ImageProject image = imageService.getImageById(id);
+		if(image != null) {
+			return ResponseEntity.ok(ImageDTO.fromImage(image));
+		}
+		return ResponseEntity.notFound().build();
+	}
+	
 
 }

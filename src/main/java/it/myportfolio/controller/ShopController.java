@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ import it.myportfolio.dto.SalesOrderDTO;
 import it.myportfolio.dto.ShopableImageDTO;
 import it.myportfolio.mapper.Mapper;
 import it.myportfolio.model.Cart;
+import it.myportfolio.model.ERole;
+import it.myportfolio.model.Role;
 import it.myportfolio.model.SalesOrder;
 import it.myportfolio.model.ShopableImage;
 import it.myportfolio.model.User;
@@ -31,7 +34,7 @@ import it.myportfolio.service.UserService;
 import it.myportfolio.utility.BlockchainTransactionService;
 import jakarta.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/shop")
 public class ShopController {
@@ -159,7 +162,8 @@ public class ShopController {
 			}
 
 			if (!SoldId.isEmpty()) {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Product with ID: " + SoldId.toString()+ " have already been sold");
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body("Product with ID: " + SoldId.toString() + " have already been sold");
 			} else {
 				List<ShopableImage> images = new ArrayList<>();
 				List<Long> IID = new ArrayList<>();
@@ -168,14 +172,12 @@ public class ShopController {
 					IID.add(shopableImage.getId());
 				}
 
-				cartService.emptyCart(user);
+				
 
 				SalesOrder order = new SalesOrder();
 				order.setTimestamp(new Date());
 				order.setUser(user);
 				order.setPurchasedImage(images);
-
-				salesOrderService.addSalesOrder(order);
 
 				DetailsSalesOrderDTO detailsSalesOrderDTO = new DetailsSalesOrderDTO();
 				detailsSalesOrderDTO.setId(order.getId());
@@ -193,9 +195,13 @@ public class ShopController {
 					if (i == 3) {
 						break;
 					}
-					hash = BlockchainTransactionService.verify_hash(hash);
+					hash = BlockchainTransactionService.registry_transaction(userId, IID, new java.util.Date());
 					i++;
 				}
+				System.out.println("LATO JAVA: " + hash);
+				cartService.emptyCart(user);
+				order.setHash(hash);
+				salesOrderService.addSalesOrder(order);
 
 				detailsSalesOrderDTO.setHash(hash);
 				return ResponseEntity.ok(detailsSalesOrderDTO);
@@ -216,10 +222,17 @@ public class ShopController {
 		String token = jwtUtils.getJwtFromCookies(request);
 		if (jwtUtils.validateJwtToken(token)) {
 			Long userId = (Long) jwtUtils.getUserIdFromJwtToken(token);
+			User user = userService.getUserById(userId).get();
 			Optional<SalesOrder> opionalSalesOrder = salesOrderService.getOrderById(id);
 			SalesOrder salesOrder = opionalSalesOrder.get();
+			Boolean isAdmin = false;
 
-			if (salesOrder.getUser().getId() == userId) {
+			for (Role role : user.getRoles()) {
+				if (role.getName() == ERole.ROLE_ADMIN) {
+					isAdmin = true;
+				}
+			}
+			if (salesOrder.getUser().getId() == userId || isAdmin == true) {
 
 				DetailsSalesOrderDTO detailsSalesOrderDTO = new DetailsSalesOrderDTO();
 				detailsSalesOrderDTO.setId(id);

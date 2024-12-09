@@ -70,33 +70,33 @@ public class MyportfolioApplication {
 		
 	    @Override
 	    public void run(String...args) throws Exception {
-	        Role userRole = new Role(ERole.ROLE_USER);
-	    	Role adminRole = new Role(ERole.ROLE_ADMIN);
-	    	roleRepository.save(userRole);
-	    	roleRepository.save(adminRole);
-	    		
-	    	User admin = new User("admin", "admin@test.it", encoder.encode("admin"), "admin", "admin");
-	    	Set<Role> adminRoles = new HashSet<>();
-	    	adminRoles.add(adminRole);
-	    	adminRoles.add(userRole);
-	    	admin.setRoles(adminRoles);
-	    	admin.setEnable(true);
-			
-	    	userRepository.save(admin);
-	    		
-	    	User user = new User("user", "user@test.it", encoder.encode("user"), "user", "user");
-	    	Set<Role> userRoles = new HashSet<>();
-	    	userRoles.add(userRole);
-	    	user.setRoles(userRoles);
-	    	user.setEnable(true);
-	    	userRepository.save(user);
-	    	
-	    	Work work = new Work ();
-	    	work.setCompany("Shop");
-	    	work.setCompletionDate(new java.util.Date());
-	    	work.setTitle("Shop");
-	    	
-	    	workRepository.save(work);  	
+//	        Role userRole = new Role(ERole.ROLE_USER);
+//	    	Role adminRole = new Role(ERole.ROLE_ADMIN);
+//	    	roleRepository.save(userRole);
+//	    	roleRepository.save(adminRole);
+//	    		
+//	    	User admin = new User("admin", "admin@test.it", encoder.encode("admin"), "admin", "admin");
+//	    	Set<Role> adminRoles = new HashSet<>();
+//	    	adminRoles.add(adminRole);
+//	    	adminRoles.add(userRole);
+//	    	admin.setRoles(adminRoles);
+//	    	admin.setEnable(true);
+//			
+//	    	userRepository.save(admin);
+//	    		
+//	    	User user = new User("user", "user@test.it", encoder.encode("user"), "user", "user");
+//	    	Set<Role> userRoles = new HashSet<>();
+//	    	userRoles.add(userRole);
+//	    	user.setRoles(userRoles);
+//	    	user.setEnable(true);
+//	    	userRepository.save(user);
+//	    	
+//	    	Work work = new Work ();
+//	    	work.setCompany("Shop");
+//	    	work.setCompletionDate(new java.util.Date());
+//	    	work.setTitle("Shop");
+//	    	
+//	    	workRepository.save(work);  	
 	       
 	    }
 	}

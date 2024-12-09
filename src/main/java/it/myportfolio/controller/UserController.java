@@ -1,6 +1,7 @@
 package it.myportfolio.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.myportfolio.dto.UserDTO;
 import it.myportfolio.dto.UserPersonalDetailsDTO;
+import it.myportfolio.dto.WorkDTO;
 import it.myportfolio.mapper.Mapper;
 import it.myportfolio.model.User;
 import it.myportfolio.model.Work;
@@ -29,7 +31,7 @@ import it.myportfolio.service.UserService;
 import it.myportfolio.service.WorkService;
 import jakarta.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -72,7 +74,12 @@ public class UserController {
 			List <UserDTO> usersDTO = new ArrayList<>();
 			for (User user : users) {
 				UserDTO userDTO =	Mapper.toDTO(UserDTO.class, user);
-				userDTO.setShopableImage(user.getVisibleWorks());
+				Set<WorkDTO> workDTOs = new HashSet<>();
+				
+				for (Work work : user.getVisibleWorks()) {
+					workDTOs.add(WorkDTO.fromWork(work));
+				}
+				userDTO.setVisibleWork(workDTOs);
 				usersDTO.add(userDTO);
 			}
 			return ResponseEntity.ok(usersDTO);
