@@ -59,39 +59,8 @@ public class ThumbnailGenerator {
 	            System.err.println("Failed to add watermark to the thumbnail.");
 	        }
 	    }
-//	public static void makeThumbnail(ImageProject image) throws IOException {
-//		
-//	    String photoUrl=image.getURL();
-//		String thumbnailUrl=image.getThumbnailURL();
-//		String ext = FilenameUtils.getExtension(thumbnailUrl);
-//		Path thumbnailPath = Paths.get(thumbnailUrl);
-//		//File f = new File(thumbnailPath.toString());
-//	    
-//	    
-//	    //if(!f.exists()) { 
-//	    
-//	    	Path thumbnailBasePath = thumbnailPath.getParent();
-//	    	File outputFolder = new File(thumbnailBasePath.toString());
-//	        
-//	        if (!outputFolder.exists()) {
-//	        	System.out.println("entrato check directory e creazione");
-//	        	outputFolder.mkdirs();
-//	        }
-//	        BufferedImage originalImage = ImageIO.read(new File(photoUrl));
-//	      
-//	        int lengthThumbnail = (int) (originalImage.getWidth() * 0.3);
-//	        int widthThumbnail = (int) (originalImage.getHeight() * 0.3);
-//	       
-//	        BufferedImage thumbnail = new BufferedImage(lengthThumbnail, widthThumbnail, BufferedImage.TYPE_INT_RGB);
-//	    
-//	        Graphics2D g2 = thumbnail.createGraphics();
-//	        g2.drawImage(originalImage, 0, 0, lengthThumbnail, widthThumbnail, null);
-//	        g2.drawImage(originalImage.getScaledInstance(widthThumbnail, lengthThumbnail, Image.SCALE_SMOOTH), 0, 0, null);
-//	        g2.dispose();
-//	        
-//	        ImageIO.write(thumbnail,ext, new File(thumbnailPath.toString()));
-//	    }
-//	    
+
+	 
 	    public static BufferedImage addTextWatermark(BufferedImage sourceImage) {
 	        try {
 	            String text = "© MyPortfolio 2024";
@@ -111,9 +80,7 @@ public class ThumbnailGenerator {
 
 	            // paints the textual watermark
 	            g2d.drawString(text, centerX, centerY);
-
 	            g2d.dispose();
-
 	            return sourceImage;
 
 	        } catch (Exception ex) {
