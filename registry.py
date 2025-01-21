@@ -6,9 +6,9 @@ from eth_account import Account
 account = Account.create()
 nuovo_indirizzo = account.address
  
-infura_url = 'https://sepolia.infura.io/v3/5cb88f299e974e9082c695c5fb3e9b13'
-private_key =  #metamask
-from_account = '0x00C007CFf2bAe0b56d667e5ce421FBA83B007180'  #metamask
+infura_url = #
+private_key = #
+from_account = #
 to_account=nuovo_indirizzo
 web3 = Web3(Web3.HTTPProvider(infura_url))  
   
