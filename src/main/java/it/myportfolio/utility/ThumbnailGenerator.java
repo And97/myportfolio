@@ -40,14 +40,14 @@ public class ThumbnailGenerator {
 	        System.out.println(photoUrl);
 	        BufferedImage originalImage = ImageIO.read(new File(photoUrl));
 	      
-	        int lengthThumbnail = (int) (originalImage.getWidth() * 0.3);
-	        int widthThumbnail = (int) (originalImage.getHeight() * 0.3);
+	        int widthThumbnail = (int) (originalImage.getWidth() * 0.3);
+	        int heightThumbnail = (int) (originalImage.getHeight() * 0.3);
 	       
-	        BufferedImage thumbnail = new BufferedImage(lengthThumbnail, widthThumbnail, BufferedImage.TYPE_INT_RGB);
+	        BufferedImage thumbnail = new BufferedImage(widthThumbnail, heightThumbnail, BufferedImage.TYPE_INT_RGB);
 	    
 	        Graphics2D g2 = thumbnail.createGraphics();
-	        g2.drawImage(originalImage, 0, 0, lengthThumbnail, widthThumbnail, null);
-	        g2.drawImage(originalImage.getScaledInstance(widthThumbnail, lengthThumbnail, Image.SCALE_SMOOTH), 0, 0, null);
+	        g2.drawImage(originalImage, 0, 0,widthThumbnail, heightThumbnail, null);
+	        g2.drawImage(originalImage.getScaledInstance(widthThumbnail, heightThumbnail, Image.SCALE_DEFAULT), 0, 0, null);
 	        g2.dispose();
 	        
 	        // Add watermark to the thumbnail
